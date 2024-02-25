@@ -1,3 +1,5 @@
+import "@/styles/global.css";
+
 export default function RootLayout({
   children,
 }: {
@@ -5,6 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <h1>Always here</h1>
       <body>{children}</body>
     </html>
   );
