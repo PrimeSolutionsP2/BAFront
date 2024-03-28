@@ -9,5 +9,5 @@ interface PageProps {
 }
 
 export default function Page(props: PageProps) {
-  return <h2 className="text-4xl text-blue-500">App Router</h2>;
+  return <h2 className="text-var-red">Inico Page</h2>;
 }

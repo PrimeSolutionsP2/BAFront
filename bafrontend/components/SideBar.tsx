@@ -1,7 +1,8 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import userIcon from "../public/icons/user-icon.png"
 import inicioIcon from "../public/icons/inicio-icon-b.svg";
 import asociadosIcon from "../public/icons/asociados-icon-b.svg";
@@ -22,9 +23,11 @@ import configuracionesIconRed from "../public/icons/configuraciones-icon-r.svg"
 
 export default function SideBar() {
 
-  const style = "px-10 py-4 flex flex-row gap-3 items-center ";
+  const style = "px-10 py-4 flex flex-row gap-3 items-center cursor-pointer ";
   const searchParams = useSearchParams();
-  const activeTab: string | null = searchParams.get("tab");
+  const pathName = usePathname();
+  const activeTab: string | null = pathName.split("/")[pathName.split("/").length - 1];
+  console.log(activeTab)
 
   return (
     <div className="h-screen w-[20%] shadow">
@@ -40,37 +43,37 @@ export default function SideBar() {
             </div>
           </div>
         </li>
-        <li className={style + (activeTab === "inicio" || activeTab === null ? "text-var-red" : null)}>
-            <Image src={activeTab === "inicio" || activeTab === null ? inicioIconRed : inicioIcon} alt="inicio-icon"/>
-          <p>Inicio</p>
+        <li className={style + (activeTab === "inicio" || activeTab === "" ? "text-var-red" : null)}>
+            <Image src={activeTab === "inicio" || activeTab === "" ? inicioIconRed : inicioIcon} alt="inicio-icon"/>
+          <Link href="/">Inicio</Link>
         </li>
         <li className={style + (activeTab === "asociados" ? "text-var-red" : null)}>
           <Image src={activeTab === "asociados" ? asociadosIconRed : asociadosIcon} alt="asociados-icon"/>
-          <p>Asociados</p>
+          <Link href="/asociados">Asociados</Link>
         </li>
         <li className={style + (activeTab === "puntos-acopio" ? "text-var-red" : null)}>
           <Image src={activeTab === "puntos-acopio" ? puntosAcopioIconRed : puntosAcopioIcon} alt="puntos-acopio-icon"/>
-          <p>Puntos de acopio</p>
+          <Link href="/puntos-acopio">Puntos de acopio</Link>
         </li>
         <li className={style + (activeTab === "metricas" ? "text-var-red" : null)}>
           <Image src={activeTab === "metricas" ? metricasIconRed : metricasIcon} alt="metricas-icon"/>
-          <p>Metricas</p>
+          <Link href="/metricas">Metricas</Link>
         </li>
         <li className={style + (activeTab === "registros" ? "text-var-red" : null)}>
           <Image src={activeTab === "registros" ? registrosIconRed : registrosIcon} alt="registros-icon"/>
-          <p>Registros</p>
+          <Link href="/registros">Registros</Link>
         </li>
         <li className={style + (activeTab === "recolecciones" ? "text-var-red" : null)}>
           <Image src={activeTab === "recolecciones" ? recoleccionesIconRed : recoleccionesIcon} alt="recolecciones-icon"/>
-          <p>Recolecciones</p>
+          <Link href="/recolecciones">Recolecciones</Link>
         </li>
         <li className={style + (activeTab === "perfil" ? "text-var-red" : null)}>
           <Image src={activeTab === "perfil" ? perfilIconRed : perfilIcon} alt="perfil-icon"/>
-          <p>Perfil</p>
+          <Link href="/perfil">Perfil</Link>
         </li>
         <li className={style + (activeTab === "configuraciones" ? "text-var-red" : null)}>
           <Image src={activeTab === "configuraciones" ? configuracionesIconRed : configuracionesIcon} alt="configuraciones-icon"/>
-          <p>Configuraciones</p>
+          <Link href="/configuraciones">Configuraciones</Link>
         </li>
       </ul>
     </div>
