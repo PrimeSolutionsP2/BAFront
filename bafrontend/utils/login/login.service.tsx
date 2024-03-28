@@ -1,6 +1,6 @@
 interface LoginRequest {
-    mail: string;
-    password: string;
+    mail?: string;
+    password?: string;
 }
 
 interface LoginResponse {
