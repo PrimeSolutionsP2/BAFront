@@ -3,5 +3,5 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <h1 className="text-4xl text-blue-500">App Router</h1>;
+  return <h2 className="text-4xl text-blue-500">App Router</h2>;
 }
