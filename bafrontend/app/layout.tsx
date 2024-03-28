@@ -15,7 +15,7 @@ export default function RootLayout(props: RootProps) {
         <Header />
         <div className="flex flex-row w-[100%] justify-between">
           <SideBar />
-          <div className="w-[100%]">
+          <div className="w-[100%] p-8">
             {props.children}
           </div>
         </div>
