@@ -6,3 +6,11 @@ body{
     padding: 0;
     margin: 0;
 }
+
+.titleBar{
+    border: 10em red;
+}
+
+.centered-table thead tr{
+    text-align: center;
+}
