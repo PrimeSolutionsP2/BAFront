@@ -1,3 +1,3 @@
 export default function Page(){
-    return <h2 className="text-var-red">Registros</h2>
+    return <h2 className="text-var-red">Solicitudes</h2>
 }
