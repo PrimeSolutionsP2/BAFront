@@ -83,6 +83,7 @@ export async function GetUsers(): Promise<UserData[]> {
     });
     console.log(data)
     const response = await data.json();
+    console.log(response)
     return response;
 }
 
