@@ -1,3 +1,5 @@
+import { USER_API } from "utils/constants";
+
 interface LoginRequest {
     mail?: string;
     password?: string;
@@ -37,7 +39,7 @@ export interface CreateUserResponse {
 }
 
 export async function Login(credentials: LoginRequest): Promise<LoginResponse | ErrorResponse> {
-    const apiUrl = process.env.USER_API;
+    const apiUrl = USER_API;
     if (!apiUrl) {
         throw new Error('USER_API is not defined');
     }
@@ -53,7 +55,7 @@ export async function Login(credentials: LoginRequest): Promise<LoginResponse | 
 }
 
 export async function CreateUser(credentials: CreateUserRequest): Promise<CreateUserResponse | ErrorResponse> {
-    const apiUrl = process.env.USER_API;
+    const apiUrl = USER_API;
     if (!apiUrl) {
         throw new Error('USER_API is not defined');
     }
@@ -68,24 +70,24 @@ export async function CreateUser(credentials: CreateUserRequest): Promise<Create
     return response;
 }
 
-export async function GetUsers(credentials: LoginRequest): Promise<UserData[]> {
-    const apiUrl = process.env.USER_API;
+export async function GetUsers(): Promise<UserData[]> {
+    const apiUrl = USER_API;
     if (!apiUrl) {
         throw new Error('USER_API is not defined');
     }
-    const data = await fetch(apiUrl + "/get/users",{
+    const data = await fetch(apiUrl + "get/users",{
         method: "GET",
         headers: {
             "Content-Type": "application/json"
-        },
-        body: JSON.stringify(credentials)
+        }
     });
+    console.log(data)
     const response = await data.json();
     return response;
 }
 
 export async function DeleteUsers(id: number): Promise<ErrorResponse[]> {
-    const apiUrl = process.env.USER_API;
+    const apiUrl = USER_API;
     if (!apiUrl) {
         throw new Error('USER_API is not defined');
     }
