@@ -7,7 +7,7 @@ interface LoginResponse {
     id: number;
     name: string;
     mail: string;
-    type: string;
+    type: number;
 }
 
 interface ErrorResponse {
@@ -19,13 +19,21 @@ interface UserData {
     id: number;
     name: string;
     mail: string;
-    type: string;
+    type: number;
 }
 
-interface CreateUserRequest {
+export interface CreateUserRequest {
+    id: number;
+    name: string;
+    lastName: string;
+    phoneNumber: string;
     mail: string;
-    password: string;
-    type: string;
+    type: number;
+}
+
+export interface CreateUserResponse {
+    code: number;
+    description: string;
 }
 
 export async function Login(credentials: LoginRequest): Promise<LoginResponse | ErrorResponse> {
@@ -44,7 +52,7 @@ export async function Login(credentials: LoginRequest): Promise<LoginResponse | 
     return response;
 }
 
-export async function CreateUser(credentials: CreateUserRequest): Promise<ErrorResponse> {
+export async function CreateUser(credentials: CreateUserRequest): Promise<CreateUserResponse | ErrorResponse> {
     const apiUrl = process.env.USER_API;
     if (!apiUrl) {
         throw new Error('USER_API is not defined');
