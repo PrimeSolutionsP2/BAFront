@@ -7,7 +7,7 @@ export interface UserData {
   id: number;
   name: string;
   mail: string;
-  type: number;
+  type: number | string;
 }
 
 export default function Page() {
