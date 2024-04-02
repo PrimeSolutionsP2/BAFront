@@ -8,7 +8,7 @@ import inicioIcon from "../public/icons/inicio-icon-b.svg";
 import asociadosIcon from "../public/icons/asociados-icon-b.svg";
 import puntosAcopioIcon from "../public/icons/puntos-acopio-icon-b.svg";
 import metricasIcon from "../public/icons/metricas-icon-b.svg";
-import registrosIcon from "../public/icons/registros-icon-b.svg";
+import solicitudesIcon from "../public/icons/registros-icon-b.svg";
 import recoleccionesIcon from "../public/icons/recolecciones-icon-b.svg";
 import perfilIcon from "../public/icons/perfil-icon-b.svg";
 import configuracionesIcon from "../public/icons/configuraciones-icon-b.svg";
@@ -16,7 +16,7 @@ import inicioIconRed from "../public/icons/inicio-icon-r.svg";
 import asociadosIconRed from "../public/icons/asociados-icon-r.svg";
 import puntosAcopioIconRed from "../public/icons/puntos-acopio-icon-r.svg";
 import metricasIconRed from "../public/icons/metricas-icon-r.svg";
-import registrosIconRed from "../public/icons/registros-icon-r.svg";
+import solicitudesIconRed from "../public/icons/registros-icon-r.svg";
 import recoleccionesIconRed from "../public/icons/recolecciones-icon-r.svg";
 import perfilIconRed from "../public/icons/perfil-icon-r.svg";
 import configuracionesIconRed from "../public/icons/configuraciones-icon-r.svg";
@@ -103,16 +103,16 @@ export default function SideBar() {
             </li>
             <li
               className={
-                style + (activeTab === "registros" ? "text-var-red" : null)
+                style + (activeTab === "solicitudes" ? "text-var-red" : null)
               }
             >
               <Image
                 src={
-                  activeTab === "registros" ? registrosIconRed : registrosIcon
+                  activeTab === "solicitudes" ? solicitudesIconRed : solicitudesIcon
                 }
                 alt="registros-icon"
               />
-              <Link href="/registros">Registros</Link>
+              <Link href="/solicitudes">Solicitudes</Link>
             </li>
             <li
               className={
