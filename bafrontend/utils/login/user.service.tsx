@@ -44,6 +44,8 @@ export async function Login(credentials: LoginRequest): Promise<LoginResponse | 
     return response;
 }
 
+
+
 export async function CreateUser(credentials: CreateUserRequest): Promise<ErrorResponse> {
     const apiUrl = process.env.USER_API;
     if (!apiUrl) {
@@ -59,6 +61,8 @@ export async function CreateUser(credentials: CreateUserRequest): Promise<ErrorR
     const response = await data.json();
     return response;
 }
+
+
 
 export async function GetUsers(credentials: LoginRequest): Promise<UserData[]> {
     const apiUrl = process.env.USER_API;

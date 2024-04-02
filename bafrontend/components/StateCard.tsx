@@ -7,13 +7,13 @@ interface StateCardProps {
 }
 export default function StateCard({ statusString, color,className }: StateCardProps) {
 
-    const opaqueColor = Color(color).alpha(0.5).string();
+    const opaqueColor = Color(color).alpha(0.2).string();
 
     return (
         <div className={className} style={{backgroundColor:opaqueColor}}>
-        <span className="font-semibold w-max text-center p-5" style={{color:color}}>
+        <p className="font-medium p-3" style={{color:color}}>
             {statusString}
-        </span>
+        </p>
         </div>
         )
 }
