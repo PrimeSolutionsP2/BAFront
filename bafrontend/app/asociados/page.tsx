@@ -3,7 +3,7 @@
 import { GetUsers } from "utils/login/user.service";
 import { useEffect, useState } from "react";
 
-interface UserData {
+export interface UserData {
   id: number;
   name: string;
   mail: string;
@@ -11,28 +11,10 @@ interface UserData {
 }
 
 export default function Page() {
-  // const users: UserData[] = [
-  //   {
-  //     id: 0,
-  //     name: "Felipe",
-  //     mail: "felipe@gmail.com",
-  //     type: "ADMIN",
-  //   },
-  // ];
 
   const [users, setUsers] = useState<UserData[]>([{id: 0, name: "Felipe", mail: "", type: 0}]);
 
   useEffect(() => {
-    // (async () => {
-    //   try {
-    //     console.log("Fetching users...")
-    //     const apiData = await GetUsers();
-    //     setUsers(apiData);
-    //     apiData.map((user) => {console.log(user)})
-    //   }catch (err) {
-    //     console.error(err)
-    //   }
-    // })
     const fetchData = async () => {
       console.log("Fetching users...")
       setUsers(await GetUsers());

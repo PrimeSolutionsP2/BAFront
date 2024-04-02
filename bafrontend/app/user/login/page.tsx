@@ -1,16 +1,19 @@
 "use client"
 
-import { RefObject, useRef } from "react"
+import { RefObject, useContext, useRef } from "react"
 import {Login} from "utils/login/user.service";
+import { UserContext } from "context/UserContext";
 
 export default function Page() {
 
     const mailRef: RefObject<HTMLInputElement> = useRef(null);
     const passwordRef: RefObject<HTMLInputElement> = useRef(null);
 
+    const {setUser} = useContext(UserContext);
+
     const handleLogin = async () => {
         event?.preventDefault();
-        console.log(await Login({mail: mailRef.current?.value, password: passwordRef.current?.value}))
+        setUser(await Login({mail: mailRef.current?.value, password: passwordRef.current?.value}))
     }
 
     return(

@@ -38,12 +38,12 @@ export interface CreateUserResponse {
     description: string;
 }
 
-export async function Login(credentials: LoginRequest): Promise<LoginResponse | ErrorResponse> {
+export async function Login(credentials: LoginRequest): Promise<UserData> {
     const apiUrl = USER_API;
     if (!apiUrl) {
         throw new Error('USER_API is not defined');
     }
-    const data = await fetch(apiUrl + "/login/user",{
+    const data = await fetch(apiUrl + "login/user",{
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -59,7 +59,7 @@ export async function CreateUser(credentials: CreateUserRequest): Promise<Create
     if (!apiUrl) {
         throw new Error('USER_API is not defined');
     }
-    const data = await fetch(apiUrl + "/login/user",{
+    const data = await fetch(apiUrl + "create/user",{
         method: "POST",
         headers: {
             "Content-Type": "application/json"
