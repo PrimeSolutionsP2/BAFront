@@ -30,3 +30,18 @@ export default async function addPickupRequest(payload:pickupRequestReq) {
         console.error(`Error sending request: ${error}`);
     }
 }
+
+export async function getPickupRequest() {
+    try {
+        const api_url = "http://localhost:8081/requestCollections/";
+        const response = await fetch(api_url+"requestCollecitons", {
+            method: "GET"
+        });
+
+        let jsonResponse =  await response.json();
+        return jsonResponse
+    } catch (error) {
+        console.error(`Error sending request: ${error}`);
+    }
+    
+}
