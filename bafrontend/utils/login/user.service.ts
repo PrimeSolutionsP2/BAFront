@@ -25,12 +25,12 @@ interface UserData {
 }
 
 export interface CreateUserRequest {
-    id: number;
-    name: string;
-    lastName: string;
-    phoneNumber: string;
-    mail: string;
-    type: number;
+    id: any;
+    name: any;
+    lastName: any;
+    phoneNumber: any;
+    mail: any;
+    type: any;
 }
 
 export interface CreateUserResponse {
