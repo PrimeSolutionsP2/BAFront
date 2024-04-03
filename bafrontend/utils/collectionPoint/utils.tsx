@@ -1,12 +1,13 @@
 export function chooseColor(estado: any): string {
     switch (estado) {
-        case "Activo":
-            return "green"
+        case "ACTIVO":
+            return "green";
             break;
-        case "Inactivo":
-            return "red"
+        case "PENDIENTE":
+            return "gray";
+            break;
         default:
-            return "gray"
+            return "red"
         break;
     }
 }

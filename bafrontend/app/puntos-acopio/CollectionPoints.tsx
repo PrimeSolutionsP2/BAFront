@@ -27,7 +27,6 @@ export default function CollectionPoints({puntosAcopio} : {puntosAcopio : PuntoA
                 {puntosAcopio.map((puntoAcopio) => (
 
                     <button onClick={() =>{handleOpenNewsletterModal(puntoAcopio)}} >
-                        lean
                     <CollectionPointCard collectionPoint={puntoAcopio}></CollectionPointCard>
                     </button>
                 ))}
