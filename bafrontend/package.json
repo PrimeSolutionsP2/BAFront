@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "color": "^4.2.3",
     "next": "latest",
     "postcss-flexbugs-fixes": "^5.0.2",
     "react": "^18.2.0",
@@ -18,6 +19,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "6.1.5",
     "@testing-library/react": "14.1.2",
+    "@types/color": "^3.0.6",
     "@types/jest": "29.5.11",
     "@types/react": "18.2.45",
     "autoprefixer": "^10.4.17",
