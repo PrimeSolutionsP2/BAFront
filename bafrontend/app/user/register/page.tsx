@@ -1,6 +1,6 @@
 "use client";
 
-import { Ref, RefObject, useRef } from "react";
+import { RefObject, useRef } from "react";
 import { CreateUser } from "utils/login/user.service";
 import { ROLES } from "utils/constants";
 
@@ -12,7 +12,6 @@ export default function Page() {
   const numberRef: RefObject<HTMLInputElement> = useRef(null);
   const mailRef: RefObject<HTMLInputElement> = useRef(null);
   const roleRef: RefObject<HTMLSelectElement> = useRef(null);
-const passwordRef: RefObject<HTMLInputElement> = useRef(null);
 
 const handleLogin = async () => {
     event?.preventDefault();
