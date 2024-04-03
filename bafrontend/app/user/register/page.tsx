@@ -1,6 +1,6 @@
 "use client";
 
-import { Ref, RefObject, useRef } from "react";
+import { RefObject, useRef } from "react";
 import { CreateUser } from "utils/login/user.service";
 import { ROLES } from "utils/constants";
 
@@ -12,7 +12,6 @@ export default function Page() {
   const numberRef: RefObject<HTMLInputElement> = useRef(null);
   const mailRef: RefObject<HTMLInputElement> = useRef(null);
   const roleRef: RefObject<HTMLSelectElement> = useRef(null);
-const passwordRef: RefObject<HTMLInputElement> = useRef(null);
 
 const handleLogin = async () => {
     event?.preventDefault();
@@ -20,8 +19,8 @@ const handleLogin = async () => {
         await CreateUser({
             id: idRef.current?.value,
             name: nameRef.current?.value,
-            lastName: lastName.current?.value,
-            phoneNumber: numberRef.current?.value,
+            last_name: lastName.current?.value,
+            phone_number: numberRef.current?.value,
             mail: mailRef.current?.value,
             type: parseInt(roleRef.current?.value ?? ''),
         })

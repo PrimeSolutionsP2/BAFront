@@ -27,8 +27,8 @@ interface UserData {
 export interface CreateUserRequest {
     id: any;
     name: any;
-    lastName: any;
-    phoneNumber: any;
+    last_name: any;
+    phone_number: any;
     mail: any;
     type: any;
 }

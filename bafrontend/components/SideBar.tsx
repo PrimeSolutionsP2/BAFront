@@ -36,7 +36,7 @@ export default function SideBar() {
 
   return (
     <>
-      {activeTab !== "login" && activeTab !== "register" ? (
+      {activeTab !== "login" && activeTab !== "register"  && activeTab !== "registro-acopio"? (
         <div className="h-screen w-[20%] shadow">
           <ul>
             <li className="px-10 py-4">
