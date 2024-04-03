@@ -2,10 +2,11 @@ import { COLLECTION_POINT_API } from "utils/constants";
 
 export interface CollectionPointCreateRequest {
   userId: string;
-  name: string;
+  userName: string;
   lastName: string;
   email: string;
   phoneNumber: string;
+  name: string;
   agreement: string;
   address: string;
   city: string;
