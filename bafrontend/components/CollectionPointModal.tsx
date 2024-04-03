@@ -1,9 +1,10 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import Modal from "./Modal";
 import { PuntoAcopio } from "utils/collectionPoint/collectionPoint.service";
 import StateCard from "./StateCard";
 import { chooseColor } from "utils/collectionPoint/utils";
 import addPickupRequest, { pickupRequestReq } from "utils/pickupRequest/pickupRequest.service";
+import { UserContext } from "context/UserContext";
 
 
 export default function CollectionPointModal({
@@ -11,6 +12,8 @@ export default function CollectionPointModal({
   onClose,
   collectionPoint
 }) {
+
+  
 
 
   const [showPickupRequest,setShowPickupRequest] = useState(false);
@@ -80,7 +83,7 @@ export default function CollectionPointModal({
           {showPickupRequest ? <PickupRequestForm responseStatus={pickupResponseStatus} setResponse={setPickupResponseStatus} collectionPointId={ collectionPoint.id }pickupRequestDate={pickupRequestDate} setPickupRequestDate={setPickupRequestDate}></PickupRequestForm> : ""}
 
           <div>
-          {(pickupResponseStatus) ? <StateCard statusString={pickupResponseStatus.message} className="mx-auto" color={"green"}></StateCard> : ""}
+          {(pickupResponseStatus) ? <StateCard statusString={pickupResponseStatus.message} className="rounded-md text-center" color={"green"}></StateCard> : ""}
           </div>
             </div>
             :
@@ -98,13 +101,14 @@ export default function CollectionPointModal({
 
 function PickupRequestForm({pickupRequestDate, setPickupRequestDate, collectionPointId, responseStatus, setResponse}){
 
+  const {user, setUser} = useContext(UserContext);
 
-
+  console.log(user);
   async function handlePickupSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
       const payload: pickupRequestReq = {
-        userId: "Cedula1",
+        userId: user?.id,
         collectionPointId: collectionPointId,
         kilograms: 10,
         pickupDate: pickupRequestDate

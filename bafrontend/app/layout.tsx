@@ -1,7 +1,10 @@
+"use client"
+
 import Header from "@/components/Header";
 import SideBar from "@/components/SideBar";
 import TitleBar from "@/components/TitleBar";
 import "@/styles/global.css";
+import { UserContext, UserProvider } from "context/UserContext";
 
 interface RootProps {
   children: React.ReactNode;
@@ -16,11 +19,12 @@ export default function RootLayout(props: RootProps) {
       <body>
         <Header />
         <div className="flex flex-row w-[100%] justify-between">
-          <SideBar />
-          <div className="flex flex-col w-[80%]">
-          {props.children}
-          </div>
-         
+          <UserProvider>
+            <SideBar />
+            <div className="flex flex-col w-[100%]">
+              {props.children}
+            </div>
+          </UserProvider>
         </div>
       </body>
     </html>

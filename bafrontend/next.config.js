@@ -7,6 +7,12 @@ module.exports = {
           port: '',
           pathname: '/150',
         },
+        {
+          protocol: 'http',
+          hostname: 'localhost',
+          port: '8080',
+          pathname: '/users/v1/get/users',
+        }
       ],
     },
   }

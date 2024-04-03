@@ -1,5 +1,6 @@
 "use client";
 
+import { useContext } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +9,7 @@ import inicioIcon from "../public/icons/inicio-icon-b.svg";
 import asociadosIcon from "../public/icons/asociados-icon-b.svg";
 import puntosAcopioIcon from "../public/icons/puntos-acopio-icon-b.svg";
 import metricasIcon from "../public/icons/metricas-icon-b.svg";
-import registrosIcon from "../public/icons/registros-icon-b.svg";
+import solicitudesIcon from "../public/icons/registros-icon-b.svg";
 import recoleccionesIcon from "../public/icons/recolecciones-icon-b.svg";
 import perfilIcon from "../public/icons/perfil-icon-b.svg";
 import configuracionesIcon from "../public/icons/configuraciones-icon-b.svg";
@@ -16,12 +17,17 @@ import inicioIconRed from "../public/icons/inicio-icon-r.svg";
 import asociadosIconRed from "../public/icons/asociados-icon-r.svg";
 import puntosAcopioIconRed from "../public/icons/puntos-acopio-icon-r.svg";
 import metricasIconRed from "../public/icons/metricas-icon-r.svg";
-import registrosIconRed from "../public/icons/registros-icon-r.svg";
+import solicitudesIconRed from "../public/icons/registros-icon-r.svg";
 import recoleccionesIconRed from "../public/icons/recolecciones-icon-r.svg";
 import perfilIconRed from "../public/icons/perfil-icon-r.svg";
 import configuracionesIconRed from "../public/icons/configuraciones-icon-r.svg";
+import { UserContext } from "context/UserContext";
+import { ROLES } from "utils/constants";
 
 export default function SideBar() {
+
+  const {user} = useContext(UserContext);
+  const userRole = ROLES[user?.type as keyof typeof ROLES]
 
   const style = "px-10 py-4 flex flex-row gap-3 items-center cursor-pointer ";
   const pathName = usePathname();
@@ -30,7 +36,7 @@ export default function SideBar() {
 
   return (
     <>
-      {activeTab !== "login" && activeTab !== "register" ? (
+      {activeTab !== "login" && activeTab !== "register"  && activeTab !== "registro-acopio"? (
         <div className="h-screen w-[20%] shadow">
           <ul>
             <li className="px-10 py-4">
@@ -39,8 +45,8 @@ export default function SideBar() {
                   <Image src={userIcon} alt="userLogo" />
                 </div>
                 <div>
-                  <p className="text-[18px]">Usuario</p>
-                  <p className="text-[13px] text-[#A4A4A4]">Administrador</p>
+                  <p className="text-[18px]">{user?.name}</p>
+                  <p className="text-[13px] text-[#A4A4A4]">{userRole}</p>
                 </div>
               </div>
             </li>
@@ -103,16 +109,16 @@ export default function SideBar() {
             </li>
             <li
               className={
-                style + (activeTab === "registros" ? "text-var-red" : null)
+                style + (activeTab === "solicitudes" ? "text-var-red" : null)
               }
             >
               <Image
                 src={
-                  activeTab === "registros" ? registrosIconRed : registrosIcon
+                  activeTab === "solicitudes" ? solicitudesIconRed : solicitudesIcon
                 }
                 alt="registros-icon"
               />
-              <Link href="/registros">Registros</Link>
+              <Link href="/solicitudes">Solicitudes</Link>
             </li>
             <li
               className={

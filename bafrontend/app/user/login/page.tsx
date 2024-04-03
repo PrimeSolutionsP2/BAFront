@@ -1,16 +1,26 @@
 "use client"
 
-import { RefObject, useRef } from "react"
-import Login from "utils/login/user.service";
+import { RefObject, useContext, useRef } from "react"
+import {Login} from "utils/login/user.service";
+import { UserContext } from "context/UserContext";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+
+    const router = useRouter();
 
     const mailRef: RefObject<HTMLInputElement> = useRef(null);
     const passwordRef: RefObject<HTMLInputElement> = useRef(null);
 
+    const {user, setUser} = useContext(UserContext);
+
     const handleLogin = async () => {
         event?.preventDefault();
-        console.log(await Login({mail: mailRef.current?.value, password: passwordRef.current?.value}))
+        const loggedInUser = await Login({mail: mailRef.current?.value, password: passwordRef.current?.value});
+        setUser(loggedInUser);
+        if(loggedInUser?.id !== 0) {
+            router.push("/");
+        }
     }
 
     return(

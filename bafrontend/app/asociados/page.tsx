@@ -1,19 +1,26 @@
-interface UserData {
+"use client"
+
+import { GetUsers } from "utils/login/user.service";
+import { useEffect, useState } from "react";
+
+export interface UserData {
   id: number;
   name: string;
   mail: string;
-  type: string;
+  type: number | string;
 }
 
 export default function Page() {
-  const users: UserData[] = [
-    {
-      id: 0,
-      name: "Felipe",
-      mail: "felipe@gmail.com",
-      type: "ADMIN",
-    },
-  ];
+
+  const [users, setUsers] = useState<UserData[]>([{id: 0, name: "Felipe", mail: "", type: 0}]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log("Fetching users...")
+      setUsers(await GetUsers());
+    }
+    fetchData();
+  }, [])
 
 
   return (

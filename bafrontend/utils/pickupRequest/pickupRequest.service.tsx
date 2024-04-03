@@ -1,6 +1,6 @@
 export interface pickupRequestReq {
     id : string;
-    userId: string;
+    userId: string|undefined;
     collectionPointId : number;
     kilograms : number;
     pickupDate : string;
