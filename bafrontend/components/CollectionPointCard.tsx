@@ -1,19 +1,10 @@
 import {PuntoAcopio} from "app/puntos-acopio/page"
 import StateCard from "./StateCard";
+import { chooseColor } from "utils/collectionPoint/utils";
+
 
 export default function CollectionPointCard({collectionPoint} : { collectionPoint:PuntoAcopio } ){
-    function chooseColor(estado: any): string {
-        switch (estado) {
-            case "Activo":
-                return "green"
-                break;
-            case "Inactivo":
-                return "red"
-            default:
-                return "gray"
-            break;
-        }
-    }
+
 
     return (
         <div className="bg-white rounded-xl p-6 w-full mx-auto shadow-lg text-center transition duration-300 transform hover:scale-105">
