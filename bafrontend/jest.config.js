@@ -11,6 +11,9 @@ const customJestConfig = {
   testEnvironment: "jsdom",
   moduleNameMapper: {
     "^utils/(.*)$": "<rootDir>/utils/$1",
+    "^components/(.*)$": "<rootDir>/components/$1",
+    "^context/(.*)$": "<rootDir>/context/$1"
+
     // add more aliases as needed
   },
 };
