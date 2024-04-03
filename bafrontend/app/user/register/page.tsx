@@ -20,8 +20,8 @@ const handleLogin = async () => {
         await CreateUser({
             id: idRef.current?.value,
             name: nameRef.current?.value,
-            lastName: lastName.current?.value,
-            phoneNumber: numberRef.current?.value,
+            last_name: lastName.current?.value,
+            phone_number: numberRef.current?.value,
             mail: mailRef.current?.value,
             type: parseInt(roleRef.current?.value ?? ''),
         })
