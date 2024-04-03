@@ -30,13 +30,13 @@ export default function Page() {
             <div className="flex flex-col justify-center items-center gap-3">
                 <div className="flex flex-col items-center">
                     <label htmlFor="mail">Correo</label>
-                    <input type="text" name="mail" id="mail" ref={mailRef} className="border border-solid border-var-blue rounded-sm" />
+                    <input type="text" name="mail" id="mail" ref={mailRef} className="border border-solid border-var-blue rounded-lg p-2" />
                 </div>
                 <div className="flex flex-col items-center">
                     <label htmlFor="password">Contraseña</label>
-                    <input type="password" name="password" id="password" ref={passwordRef} className="border border-solid border-var-blue rounded-sm" />
+                    <input type="password" name="password" id="password" ref={passwordRef} className="border border-solid border-var-blue rounded-lg p-2" />
                 </div>
-                <button className="p-1 rounded-sm bg-var-red text-white" onClick={() => handleLogin()}>Ingresar</button>
+                <button className="p-1 rounded-lg p-2 bg-var-red text-white" onClick={() => handleLogin()}>Ingresar</button>
             </div>
         </div>
     </div>)
