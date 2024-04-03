@@ -11,7 +11,7 @@ export interface PuntoAcopio {
 
 export async function getCollectionPoints(): Promise<PuntoAcopio[]> {
 
-    const apiUrl = process.env.COLLECTIONS_API;
+    const apiUrl = process.env.COLLECTION_POINTS_API;
 
     if (!apiUrl) {
         throw new Error('COLLECTIONS_api is not defined');
