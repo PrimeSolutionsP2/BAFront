@@ -2,6 +2,9 @@
 
 import { GetUsers } from "utils/login/user.service";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import iconAddUser from "../../public/icons/icon _add user_.svg";
+import Image from "next/image";
 
 export interface UserData {
   id: number;
@@ -11,6 +14,8 @@ export interface UserData {
 }
 
 export default function Page() {
+
+  const router = useRouter();
 
   const [users, setUsers] = useState<UserData[]>([{id: 0, name: "Felipe", mail: "", type: 0}]);
 
@@ -25,6 +30,12 @@ export default function Page() {
   return (
     <div>
       <div className="shadow p-2">
+        <div className="w-[100%] p-6 bg-red flex flex-row justify-between">
+          <h1 className="text-[30px] font-bold">Asociados</h1>
+          <p className="cursor-pointer" onClick={() => router.push("/asociados/register")}>
+            <Image src={iconAddUser} alt="icon_add_user"/>
+          </p>
+        </div>
         <ul className="flex flex-row justify-between">
           <li className="w-[33.333333%] text-center">
             <p className="text-[22px] font-bold">Nombre</p>

@@ -30,7 +30,7 @@ const handleLogin = async () => {
   return (
     <div>
       <div className="flex flex-col gap-3 justify-center items-center shadow-xl w-1/4 m-auto mt-[10%] p-5">
-        <h3 className="text-3xl font-bold text-var-red">
+        <h3 className="text-3xl font-bold text-var-red text-center">
           Registro de usuarios
         </h3>
         <div className="flex flex-col justify-center items-center gap-3">
@@ -41,7 +41,7 @@ const handleLogin = async () => {
               name="id"
               id="id"
               ref={idRef}
-              className="border border-solid border-var-blue rounded-sm p-1"
+              className="border border-solid border-var-blue rounded-lg p-1"
             />
           </div>
           <div className="flex flex-col items-center">
@@ -51,7 +51,7 @@ const handleLogin = async () => {
               name="name"
               id="name"
               ref={nameRef}
-              className="border border-solid border-var-blue rounded-sm p-1"
+              className="border border-solid border-var-blue rounded-lg p-1"
             />
           </div>
           <div className="flex flex-col items-center">
@@ -61,7 +61,7 @@ const handleLogin = async () => {
               name="password"
               id="password"
               ref={lastName}
-              className="border border-solid border-var-blue rounded-sm p-1"
+              className="border border-solid border-var-blue rounded-lg p-1"
             />
           </div>
           <div className="flex flex-col items-center">
@@ -71,7 +71,7 @@ const handleLogin = async () => {
               name="text"
               id="text"
               ref={numberRef}
-              className="border border-solid border-var-blue rounded-sm p-1"
+              className="border border-solid border-var-blue rounded-lg p-1"
             />
           </div>
           <div className="flex flex-col items-center">
@@ -81,7 +81,7 @@ const handleLogin = async () => {
               name="mail"
               id="mail"
               ref={mailRef}
-              className="border border-solid border-var-blue rounded-sm p-1"
+              className="border border-solid border-var-blue rounded-lg p-1"
             />
           </div>
           <div className="flex flex-col items-center">
@@ -90,7 +90,7 @@ const handleLogin = async () => {
               name="role"
               id="role"
               ref={roleRef}
-              className="border border-solid border-var-blue rounded-sm p-1"
+              className="border border-solid border-var-blue rounded-lg p-1"
             >
               <option value={1}>{ROLES["Tipo1"]}</option>
               <option value={2}>{ROLES["Tipo2"]}</option>
@@ -98,7 +98,7 @@ const handleLogin = async () => {
             </select>
           </div>
           <button
-            className="p-1 rounded-sm bg-var-red text-white"
+            className="p-1 rounded-lg bg-var-red text-white"
             onClick={() => handleLogin()}
           >
             Crear usuario
