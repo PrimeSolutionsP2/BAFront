@@ -14,3 +14,11 @@ body{
 .centered-table thead tr{
     text-align: center;
 }
+
+.dot {
+    height: 6px;
+    width: 6px;
+    background-color: rgb(0,0,255);
+    border-radius: 50%;
+    display: inline-block;
+  }

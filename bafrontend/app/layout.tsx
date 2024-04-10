@@ -19,20 +19,13 @@ export default function RootLayout(props: RootProps) {
       <body>
         <Header />
         <div className="flex flex-row w-[100%] justify-between">
-<<<<<<< HEAD
+
           <UserProvider>
             <SideBar />
-            <div className="w-[100%] p-8">
+            <div className="flex flex-col w-[100%]">
               {props.children}
             </div>
           </UserProvider>
-=======
-          <SideBar />
-          <div className="flex flex-col w-[80%]">
-          {props.children}
-          </div>
-         
->>>>>>> feature/BOT-02
         </div>
       </body>
     </html>

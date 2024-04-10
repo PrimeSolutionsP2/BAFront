@@ -1,3 +1,5 @@
+import {COLLECTION_POINT_API} from '../constants';
+
 export interface PuntoAcopio {
     id: number;
     nombre: string;
@@ -11,21 +13,21 @@ export interface PuntoAcopio {
 
 export async function getCollectionPoints(): Promise<PuntoAcopio[]> {
 
-    const apiUrl = process.env.COLLECTIONS_API;
+    const apiUrl = COLLECTION_POINT_API;
 
     if (!apiUrl) {
         throw new Error('COLLECTIONS_api is not defined');
     }
     console.log(apiUrl)
     try {
-        const activeColPointsRes = await fetch(apiUrl + "collectionPoints/?status=3", {
+        const activeColPointsRes = await fetch(apiUrl + "?status=3", {
             method: "get",
             headers: {
                 "Content-Type": "application/json"
             }
         });
 
-        const inactiveColPointsRes = await fetch(apiUrl + "collectionPoints/?status=4", {
+        const inactiveColPointsRes = await fetch(apiUrl + "?status=4", {
             method: "get",
             headers: {
                 "Content-Type": "application/json"
@@ -65,21 +67,21 @@ export async function getCollectionPoints(): Promise<PuntoAcopio[]> {
 
 export async function getCollectionPointRequests(): Promise<PuntoAcopio[]> {
 
-    const apiUrl = process.env.COLLECTIONS_API;
+    const apiUrl = COLLECTION_POINT_API;
 
     if (!apiUrl) {
         throw new Error('COLLECTIONS_api is not defined');
     }
     console.log(apiUrl)
     try {
-        const activeColPointsRes = await fetch(apiUrl + "collectionPoints/?status=1", {
+        const activeColPointsRes = await fetch(apiUrl + "?status=1", {
             method: "get",
             headers: {
                 "Content-Type": "application/json"
             }
         });
 
-        const inactiveColPointsRes = await fetch(apiUrl + "collectionPoints/?status=2", {
+        const inactiveColPointsRes = await fetch(apiUrl + "?status=2", {
             method: "get",
             headers: {
                 "Content-Type": "application/json"

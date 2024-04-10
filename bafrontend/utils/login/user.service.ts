@@ -54,15 +54,10 @@ export async function Login(credentials: LoginRequest): Promise<UserData> {
     return response;
 }
 
-<<<<<<< HEAD:bafrontend/utils/login/user.service.ts
+
 export async function CreateUser(credentials: CreateUserRequest): Promise<CreateUserResponse | ErrorResponse> {
     const apiUrl = USER_API;
-=======
 
-
-export async function CreateUser(credentials: CreateUserRequest): Promise<ErrorResponse> {
-    const apiUrl = process.env.USER_API;
->>>>>>> feature/BOT-02:bafrontend/utils/login/user.service.tsx
     if (!apiUrl) {
         throw new Error('USER_API is not defined');
     }
@@ -77,15 +72,9 @@ export async function CreateUser(credentials: CreateUserRequest): Promise<ErrorR
     return response;
 }
 
-<<<<<<< HEAD:bafrontend/utils/login/user.service.ts
 export async function GetUsers(): Promise<UserData[]> {
     const apiUrl = USER_API;
-=======
 
-
-export async function GetUsers(credentials: LoginRequest): Promise<UserData[]> {
-    const apiUrl = process.env.USER_API;
->>>>>>> feature/BOT-02:bafrontend/utils/login/user.service.tsx
     if (!apiUrl) {
         throw new Error('USER_API is not defined');
     }
