@@ -14,8 +14,7 @@ interface RootProps {
 export default function RootLayout(props: RootProps) {
   const pageTitle = "title";
 
-  return (
-    <html lang="en">
+  return <html lang="en">
       <body>
         <Header />
         <div className="flex flex-row w-[100%] justify-between">
@@ -29,5 +28,5 @@ export default function RootLayout(props: RootProps) {
         </div>
       </body>
     </html>
-  );
+  
 }
