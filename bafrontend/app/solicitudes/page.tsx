@@ -6,7 +6,10 @@ import CollectionPoints from "../puntos-acopio/CollectionPoints";
 
 export default async function SolicitudesPuntosAcopio() {
 
+    
+
     let elements = await getCollectionPointRequests();
+    
 
     return (
         <>

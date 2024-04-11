@@ -6,12 +6,10 @@ import TitleBar from "@/components/TitleBar";
 import { PuntoAcopio, getCollectionPoints} from "utils/collectionPoint/collectionPoint.service";
 import CollectionPoints from "./CollectionPoints";
 import { pickupRequestReq } from "utils/pickupRequest/pickupRequest.service";
-import { FormEvent } from "react";
+import { FormEvent, useContext, useEffect } from "react";
 
 
 export default async function PuntosAcopio() {
-
-
 
 
     let puntosAcopio = await getCollectionPoints();

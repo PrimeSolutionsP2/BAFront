@@ -53,7 +53,6 @@ export async function getCollectionPoints(): Promise<PuntoAcopio[]> {
   if (!apiUrl) {
       throw new Error('COLLECTIONS_api is not defined');
   }
-  console.log(apiUrl)
   try {
       const activeColPointsRes = await fetch(apiUrl + "collectionPoints/?status=3", {
           method: "get",
@@ -87,7 +86,6 @@ export async function getCollectionPoints(): Promise<PuntoAcopio[]> {
               estado: item.status.name,
           }));
 
-          console.log(collectionPoints);
 
           return collectionPoints;
       } else {
@@ -105,7 +103,6 @@ export async function getCollectionPointRequests(): Promise<PuntoAcopio[]> {
     if (!apiUrl) {
         throw new Error('COLLECTIONS_api is not defined');
     }
-    console.log(apiUrl)
     try {
         const activeColPointsRes = await fetch(apiUrl + "collectionPoints/?status=1", {
             method: "get",
@@ -125,8 +122,7 @@ export async function getCollectionPointRequests(): Promise<PuntoAcopio[]> {
             const data1 = await activeColPointsRes.json();
             const data2 = await inactiveColPointsRes.json();
             
-            console.log(data1);
-            console.log(data2)
+
             const data = data1.data.concat(data2.data);
 
             let numAcopio = 0
