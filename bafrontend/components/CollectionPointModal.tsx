@@ -10,17 +10,9 @@ import { UserContext } from "context/UserContext";
 export default function CollectionPointModal({
   isOpen,
   onClose,
-  collectionPoint
+  collectionPoint,
+  children 
 }) {
-
-  
-
-
-  const [showPickupRequest,setShowPickupRequest] = useState(false);
-  const [pickupResponseStatus,setPickupResponseStatus] = useState(null);
-
-  const [pickupRequestDate,setPickupRequestDate] = useState("");
-
 
   const focusInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -32,12 +24,7 @@ export default function CollectionPointModal({
     }
   }, [isOpen]);
 
-  function handlePickupRequestForm(){
-    setShowPickupRequest(!showPickupRequest);
-    if(pickupResponseStatus){
-      setPickupResponseStatus(null)
-    }
-  }
+
 
 
 
@@ -50,7 +37,7 @@ export default function CollectionPointModal({
       {collectionPoint ?
         <div className="flex flex-col space-y-4">
           <div className="mx-auto">
-            <span className="font-bold">Nombre: {collectionPoint.nombre} </span>
+            <span className="font-bold">{collectionPoint.nombre} </span>
           </div>
 
           <div className="flex gap-4">
@@ -74,17 +61,9 @@ export default function CollectionPointModal({
           <div className="flex gap-4">
             <div><span className="font-bold">Convenio: </span>{collectionPoint.convenio}</div>
           </div>
-          <StateCard className="rounded-md text-center" color={chooseColor(collectionPoint.estado)} statusString={collectionPoint.estado} ></StateCard>
 
-          <button onClick={handlePickupRequestForm} className=" border-white font-bold  bg-[#FD595A]  text-white  border-solid border-2 rounded-xl p-1">
-            Solicitar recoleccion de residuos
-          </button>
+          {children}
 
-          {showPickupRequest ? <PickupRequestForm responseStatus={pickupResponseStatus} setResponse={setPickupResponseStatus} collectionPointId={ collectionPoint.id }pickupRequestDate={pickupRequestDate} setPickupRequestDate={setPickupRequestDate}></PickupRequestForm> : ""}
-
-          <div>
-          {(pickupResponseStatus) ? <StateCard statusString={pickupResponseStatus.message} className="rounded-md text-center" color={"green"}></StateCard> : ""}
-          </div>
             </div>
             :
 
@@ -99,35 +78,5 @@ export default function CollectionPointModal({
 };
 
 
-function PickupRequestForm({pickupRequestDate, setPickupRequestDate, collectionPointId, responseStatus, setResponse}){
-
-  const {user, setUser} = useContext(UserContext);
-
-  console.log(user);
-  async function handlePickupSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-      const payload: pickupRequestReq = {
-        userId: user?.id,
-        collectionPointId: collectionPointId,
-        kilograms: 10,
-        pickupDate: pickupRequestDate
-    };
 
 
-      const response = await addPickupRequest(payload);
-
-      setResponse(response);
-    }
-
-  return (
-
-    <form  className="flex justify-between" onSubmit={handlePickupSubmit}>
-    <label className="font-bold" htmlFor="pickupRequest">Fecha de recoleccion: </label>
-    <input type="datetime-local" id="pickupRequest" name="pickupRequest" value={pickupRequestDate} onChange={(e)=>{setPickupRequestDate(e.target.value)}}/>
-      <input className="border-white font-bold  bg-[#FD595A]  text-white  border-solid border-2 rounded-xl p-1" type="submit" value="Confirmar solicitud"/>
-      </form>
-
-
-  )
-}

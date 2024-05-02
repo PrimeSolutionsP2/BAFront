@@ -16,7 +16,7 @@ export default function Page(props: PageProps) {
   const {user} = useContext(UserContext);
 
   useEffect(() => {
-    if(user?.id === 0){
+    if(user?.id === "0"){
       router.push("user/login"); 
     }
   },[])

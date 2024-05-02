@@ -2,6 +2,7 @@
 import TitleBar from "@/components/TitleBar";
 import { getCollectionPointRequests } from "utils/collectionPoint/collectionPoint.service";
 import CollectionPoints from "../puntos-acopio/CollectionPoints";
+import CollectionPointRequests from "./collectionPointRequests";
 
 
 export default async function SolicitudesPuntosAcopio() {
@@ -13,9 +14,9 @@ export default async function SolicitudesPuntosAcopio() {
 
     return (
         <>
-            <TitleBar title={"Solicitudes de creación de punto de acopio"} />
+            <TitleBar title={"Solicitudes pendientes"} />
             <div className="p-5">
-                <CollectionPoints puntosAcopio={elements}></CollectionPoints>
+                <CollectionPointRequests puntosAcopio={elements}></CollectionPointRequests>
             </div>
         </>
     )

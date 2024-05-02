@@ -7,15 +7,12 @@ import { PuntoAcopio, getCollectionPoints} from "utils/collectionPoint/collectio
 import CollectionPoints from "./CollectionPoints";
 import { pickupRequestReq } from "utils/pickupRequest/pickupRequest.service";
 import { FormEvent, useContext, useEffect } from "react";
+import { UserContext } from "context/UserContext";
 
 
 export default async function PuntosAcopio() {
 
-
     let puntosAcopio = await getCollectionPoints();
-
-    
-
 
 
     return (

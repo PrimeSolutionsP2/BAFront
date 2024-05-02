@@ -12,7 +12,6 @@ interface RootProps {
 }
 
 export default function RootLayout(props: RootProps) {
-  const pageTitle = "title";
 
   return <html lang="en">
       <body>

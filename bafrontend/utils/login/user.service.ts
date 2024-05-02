@@ -43,6 +43,7 @@ export async function Login(credentials: LoginRequest): Promise<UserData> {
     if (!apiUrl) {
         throw new Error('USER_API is not defined');
     }
+
     const data = await fetch(apiUrl + "login/user",{
         method: "POST",
         headers: {
@@ -52,6 +53,7 @@ export async function Login(credentials: LoginRequest): Promise<UserData> {
     });
     const response = await data.json();
     return response;
+
 }
 
 

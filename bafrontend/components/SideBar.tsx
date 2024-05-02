@@ -28,7 +28,7 @@ export default function SideBar() {
 
   const { user } = useContext(UserContext);
   const userRole = user?.type !== null ? user?.type : "";
-
+  console.log(user)
   const style = "px-10 py-4 flex flex-row gap-3 items-center cursor-pointer ";
   const pathName = usePathname();
   const activeTab: string | null =

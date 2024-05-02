@@ -1,3 +1,4 @@
+import { UserData } from "app/asociados/page";
 import { COLLECTION_POINT_API } from "utils/constants";
 
 export interface CollectionPointCreateRequest {
@@ -17,6 +18,7 @@ export interface CollectionPointCreateRequest {
 
 export interface PuntoAcopio {
     id: number;
+    userId: string;
     nombre: string;
     direccion: string;
     convenio?: string;
@@ -33,6 +35,14 @@ interface GenericResponse {
     message: string;
 }
 
+export var userFilter = (user:UserData,puntoAcopio:PuntoAcopio) => {
+    if(user?.type == "ADMINISTRADOR") {
+      return true
+    }else{
+      //TODO: DECENT USER AUTORIZATION SCHEME return puntoAcopio.userId == user?.id
+      return true
+    }
+  }
 
 export async function CreateCollectionPoint(request: CollectionPointCreateRequest): Promise<GenericResponse> {
   const res = await fetch(COLLECTION_POINT_API + "request", {
@@ -44,6 +54,22 @@ export async function CreateCollectionPoint(request: CollectionPointCreateReques
   });
   const data = await res.json();
   return data;
+}
+
+export async function updateCollectionPointStatus(collectionPointId : number,newStatusId : number){
+    try{
+    const res = await fetch(COLLECTION_POINT_API + "collectionPoints/" + collectionPointId ,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({statusId : newStatusId})
+      });
+      const data = await res.json();
+      return data;
+    } catch (e) {
+        throw new Error(`Error fetching data from API: ${e}`);
+    }
 }
 
 export async function getCollectionPoints(): Promise<PuntoAcopio[]> {
@@ -59,7 +85,7 @@ export async function getCollectionPoints(): Promise<PuntoAcopio[]> {
           headers: {
               "Content-Type": "application/json"
           }
-      });getCollectionPointRequests
+      });
 
       const inactiveColPointsRes = await fetch(apiUrl + "collectionPoints/?status=4", {
           method: "get",
@@ -77,6 +103,7 @@ export async function getCollectionPoints(): Promise<PuntoAcopio[]> {
           let numAcopio = 0
           const collectionPoints: PuntoAcopio[] = data.map((item: any) => ({
               id: item.id,
+              userId:item.userId,
               nombre: item.name,
               direccion: item.address,
               convenio: item.agreement,
@@ -104,29 +131,19 @@ export async function getCollectionPointRequests(): Promise<PuntoAcopio[]> {
         throw new Error('COLLECTIONS_api is not defined');
     }
     try {
-        const activeColPointsRes = await fetch(apiUrl + "collectionPoints/?status=1", {
+        const pendingColPointsRes = await fetch(apiUrl + "collectionPoints/?status=1", {
             method: "get",
             headers: {
                 "Content-Type": "application/json"
             }
         });
 
-        const inactiveColPointsRes = await fetch(apiUrl + "collectionPoints/?status=2", {
-            method: "get",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        if (activeColPointsRes.status === 200 && inactiveColPointsRes.status === 200 ) {
-            const data1 = await activeColPointsRes.json();
-            const data2 = await inactiveColPointsRes.json();
+        if (pendingColPointsRes.status === 200) {
+            const data = await pendingColPointsRes.json();            
             
-
-            const data = data1.data.concat(data2.data);
-
+            
             let numAcopio = 0
-            const collectionPoints: PuntoAcopio[] = data.map((item: any) => ({
+            const collectionPoints: PuntoAcopio[] = data.data.map((item: any) => ({
                 id: item.id,
                 nombre: item.name,
                 direccion: item.address,
@@ -142,7 +159,7 @@ export async function getCollectionPointRequests(): Promise<PuntoAcopio[]> {
 
             return collectionPoints;
         } else {
-            throw new Error(`Error fetching data from API. Status code: ${response.status}`);
+            throw new Error(`Error fetching data from API. Status code: ${pendingColPointsRes.status}`);
         }
     } catch (e) {
         throw new Error(`Error fetching data from API: ${e}`);
