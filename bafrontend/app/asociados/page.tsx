@@ -7,7 +7,7 @@ import iconAddUser from "../../public/icons/icon _add user_.svg";
 import Image from "next/image";
 
 export interface UserData {
-  id: number;
+  id: string;
   name: string;
   mail: string;
   type: number | string;
@@ -17,7 +17,7 @@ export default function Page() {
 
   const router = useRouter();
 
-  const [users, setUsers] = useState<UserData[]>([{id: 0, name: "Felipe", mail: "", type: 0}]);
+  const [users, setUsers] = useState<UserData[]>([{id: "0", name: "unauthenticated", mail: "", type: 0}]);
 
   useEffect(() => {
     const fetchData = async () => {
