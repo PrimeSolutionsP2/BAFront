@@ -6,3 +6,10 @@ export const ROLES = {
     "Tipo2": "Recolector",
     "Tipo3": "Representante"
 }
+
+export const ROLE_ID = {
+    "ADMINISTRADOR": 1,
+    "RECOLECTOR": 2,
+    "REPRESENTANTE": 3,
+}
+

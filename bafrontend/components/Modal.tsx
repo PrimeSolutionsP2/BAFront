@@ -47,7 +47,7 @@ export default function Modal ({
   }, [isModalOpen]);
 
   return (
-    <dialog ref={modalRef} onKeyDown={handleKeyDown} className="modal p-6">
+    <dialog ref={modalRef} onKeyDown={handleKeyDown} className="modal" style={{paddingTop:"0", paddingLeft:"0",paddingRight:"0"}}>
       {hasCloseBtn && (
         <button className="modal-close-btn" onClick={handleCloseModal}>
           Close
