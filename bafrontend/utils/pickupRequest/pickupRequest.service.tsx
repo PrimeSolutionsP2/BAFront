@@ -1,5 +1,5 @@
 import { PICKUPS_API, USER_API } from "utils/constants";
-import { GetUsers } from "utils/login/user.service";
+import { UserContext } from "context/UserContext";
 
 export interface pickupRequestReq {
     id : string;
@@ -43,7 +43,7 @@ export default async function addPickupRequest(payload:pickupRequestReq) {
     }
 }
 
-export async function getPickups() {
+export async function getPickups(role: any, userId: any) {
     try {
         const apiUrl = PICKUPS_API;
 
@@ -51,8 +51,8 @@ export async function getPickups() {
             throw new Error('PICKUPS_API is not defined');
         }
 
-        const response = await fetch(apiUrl+"/requestCollectionsAdmin", {
-            method: "GET"
+        const response = await fetch(role == 2 || role == "RECOLECTOR"? apiUrl+`/requestCollectionsRecollector?recollectorId=${userId}` : apiUrl+"/requestCollectionsAdmin", {
+            method: "GET",
         });
         let jsonResponse =  await response.json();
         return jsonResponse
@@ -75,9 +75,6 @@ export async function getCollectors(){
         }
     });
     const data: User[] = await response.json();
-    console.log("data: ");
-    console.log(data);
-
     let collectors = data.filter((user) => user.type === "RECOLECTOR");
 
     console.log("collectors: ");

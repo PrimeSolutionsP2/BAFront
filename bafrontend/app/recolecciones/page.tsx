@@ -3,10 +3,11 @@
 import { getPickups, getCollectors } from "utils/pickupRequest/pickupRequest.service";
 import { PICKUP_STATUS } from "utils/constants";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import iconAddUser from "../../public/icons/icon _add user_.svg";
 import Image from "next/image";
+import { UserContext } from "context/UserContext";
 
 export interface Pickup {
   id: number;
@@ -62,10 +63,19 @@ export default function Page() {
   const [pickups, setPickups] = useState<Pickup[]>([]);
   const [collectors, setCollectors] = useState<Collector[]>([]);
 
+  const {user} = useContext(UserContext);
+  const userRole = user?.type !== null ? user?.type : 0;
+  const userId = user?.id !== null ? user?.id : "";
+
+  console.log("contexto entero: ");
+  console.log(user);
+
+  console.log("role: "+ userRole + ", userId: "+ userId);
+
   useEffect(() => {
     const fetchPickups = async () => {
       console.log("Fetching pickups...");
-      const data = await getPickups();
+      const data = await getPickups(userRole, userId);
       setPickups(data.data);
     };
     fetchPickups();
@@ -116,22 +126,35 @@ export default function Page() {
               <p className="text-[15px]">{pickup.collectionPoint.address}</p>
             </li>
             <li className="w-[16.666666%] text-center">
-              <select>
-                {collectors.map((collector) => (
-                  <option key={collector.id} value={collector.id} selected={pickup.user == null ? false : collector.id === pickup.user.id ? true : false}>
-                    {collector.name} {collector.last_name}
-                  </option>
-                ))}
-              </select>
+              {
+                userRole == 1 || userRole == "ADMINISTRADOR" ?
+                <select>
+                  {collectors.map((collector) => (
+                    <option key={collector.id} value={collector.id} selected={pickup.user == null ? false : collector.id === pickup.user.id ? true : false}>
+                      {collector.name} {collector.last_name}
+                    </option>
+                  ))}
+                </select>
+                : <p>{pickup.user == null ? null : pickup.user.name} {pickup.user == null ? null : pickup.user.lastName}</p>
+              }
+              
             </li>
             <li className="w-[16.666666%] text-center">
-              <input type="datetime-local" value={pickup.pickupDate}/>
+              {
+                userRole == 1 || userRole == "ADMINISTRADOR" ?
+                <input type="datetime-local" value={pickup.pickupDate}/>
+                : <p>{pickup.pickupDate == null ? null : pickup.pickupDate}</p>
+              }
             </li>
             <li className="w-[16.666666%] text-center">
               <p className="text-[15px]">{pickup.pickupRequestStatus == null ? "es null" : PICKUP_STATUS[pickup.pickupRequestStatus.id]}</p>
             </li>
             <li className="w-[16.666666%] text-center">
-              <button>Enviar</button>
+              {
+                userRole == 1 || userRole == "ADMINISTRADOR" ?
+                <button>Notificar</button>
+                : <button>Finalizar</button>
+              }
             </li>
           </ul>
         ))}
