@@ -1,5 +1,6 @@
 export const USER_API = "http://localhost:5000/user/v1/";
 export const COLLECTION_POINT_API = "http://localhost:8080/api/v1/";
+export const PICKUPS_API = "http://localhost:8081/collections";
 
 export const ROLES = {
     "Tipo1": "Administrador",
@@ -13,3 +14,8 @@ export const ROLE_ID = {
     "REPRESENTANTE": 3,
 }
 
+export const PICKUP_STATUS = {
+    1: "PENDIENTE",
+    2: "AGENDADA",
+    3: "FINALIZADA"
+}
