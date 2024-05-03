@@ -25,7 +25,6 @@ import { UserContext } from "context/UserContext";
 import { ROLES } from "utils/constants";
 
 export default function SideBar() {
-
   const { user } = useContext(UserContext);
   const userRole = user?.type !== null ? user?.type : "";
   console.log(user)
@@ -36,7 +35,7 @@ export default function SideBar() {
 
   return (
     <>
-      {activeTab !== "login" && activeTab !== "registro-acopio"? (
+      {activeTab !== "login" && activeTab !== "registro-acopio" ? (
         <div className="h-screen w-[20%] shadow">
           <ul>
             <li className="px-10 py-4">
@@ -68,73 +67,99 @@ export default function SideBar() {
               />
               <Link href="/">Inicio</Link>
             </li>
-            <li
-              className={
-                style + (activeTab === "asociados" ? "text-var-red" : null)
-              }
-            >
-              <Image
-                src={
-                  activeTab === "asociados" ? asociadosIconRed : asociadosIcon
+            {userRole === "ADMINISTRADOR" ? (
+              <li
+                className={
+                  style + (activeTab === "asociados" ? "text-var-red" : null)
                 }
-                alt="asociados-icon"
-              />
-              <Link href="/asociados">Asociados</Link>
-            </li>
-            <li
-              className={
-                style + (activeTab === "puntos-acopio" ? "text-var-red" : null)
-              }
-            >
-              <Image
-                src={
-                  activeTab === "puntos-acopio"
-                    ? puntosAcopioIconRed
-                    : puntosAcopioIcon
+              >
+                <Image
+                  src={
+                    activeTab === "asociados" ? asociadosIconRed : asociadosIcon
+                  }
+                  alt="asociados-icon"
+                />
+                <Link href="/asociados">Asociados</Link>
+              </li>
+            ) : (
+              ""
+            )}
+            {userRole === "ADMINISTRADOR" || userRole === "REPRESENTANTE" ? (
+              <li
+                className={
+                  style +
+                  (activeTab === "puntos-acopio" ? "text-var-red" : null)
                 }
-                alt="puntos-acopio-icon"
-              />
-              <Link href="/puntos-acopio">Puntos de acopio</Link>
-            </li>
-            <li
-              className={
-                style + (activeTab === "metricas" ? "text-var-red" : null)
-              }
-            >
-              <Image
-                src={activeTab === "metricas" ? metricasIconRed : metricasIcon}
-                alt="metricas-icon"
-              />
-              <Link href="/metricas">Metricas</Link>
-            </li>
-            <li
-              className={
-                style + (activeTab === "solicitudes" ? "text-var-red" : null)
-              }
-            >
-              <Image
-                src={
-                  activeTab === "solicitudes" ? solicitudesIconRed : solicitudesIcon
+              >
+                <Image
+                  src={
+                    activeTab === "puntos-acopio"
+                      ? puntosAcopioIconRed
+                      : puntosAcopioIcon
+                  }
+                  alt="puntos-acopio-icon"
+                />
+                <Link href="/puntos-acopio">Puntos de acopio</Link>
+              </li>
+            ) : (
+              ""
+            )}
+            {userRole === "ADMINISTRADOR" ? (
+              <li
+                className={
+                  style + (activeTab === "metricas" ? "text-var-red" : null)
                 }
-                alt="registros-icon"
-              />
-              <Link href="/solicitudes">Solicitudes</Link>
-            </li>
-            <li
-              className={
-                style + (activeTab === "recolecciones" ? "text-var-red" : null)
-              }
-            >
-              <Image
-                src={
-                  activeTab === "recolecciones"
-                    ? recoleccionesIconRed
-                    : recoleccionesIcon
+              >
+                <Image
+                  src={
+                    activeTab === "metricas" ? metricasIconRed : metricasIcon
+                  }
+                  alt="metricas-icon"
+                />
+                <Link href="/metricas">Metricas</Link>
+              </li>
+            ) : (
+              ""
+            )}
+            {userRole === "ADMINISTRADOR" ? (
+              <li
+                className={
+                  style + (activeTab === "solicitudes" ? "text-var-red" : null)
                 }
-                alt="recolecciones-icon"
-              />
-              <Link href="/recolecciones">Recolecciones</Link>
-            </li>
+              >
+                <Image
+                  src={
+                    activeTab === "solicitudes"
+                      ? solicitudesIconRed
+                      : solicitudesIcon
+                  }
+                  alt="registros-icon"
+                />
+                <Link href="/solicitudes">Solicitudes</Link>
+              </li>
+            ) : (
+              ""
+            )}
+            {userRole === "ADMINISTRADOR" || userRole === "RECOLECTOR" ? (
+              <li
+                className={
+                  style +
+                  (activeTab === "recolecciones" ? "text-var-red" : null)
+                }
+              >
+                <Image
+                  src={
+                    activeTab === "recolecciones"
+                      ? recoleccionesIconRed
+                      : recoleccionesIcon
+                  }
+                  alt="recolecciones-icon"
+                />
+                <Link href="/recolecciones">Recolecciones</Link>
+              </li>
+            ) : (
+              ""
+            )}
             <li
               className={
                 style + (activeTab === "perfil" ? "text-var-red" : null)
