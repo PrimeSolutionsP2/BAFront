@@ -1,101 +1,141 @@
-'use client';
-import Calendar from "@/components/Calendar";
-import DayEvents from "@/components/DayEvents";
-import TitleBar from "@/components/TitleBar";
-import dayjs from "dayjs";
-import { useState } from "react";
+"use client";
 
+import { getPickups, getCollectors } from "utils/pickupRequest/pickupRequest.service";
+import { PICKUP_STATUS } from "utils/constants";
 
-interface IEvent{
-    id : number;
-    collectionPointName: string;
-    dateTimeString : string;
-    weight:number;
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import iconAddUser from "../../public/icons/icon _add user_.svg";
+import Image from "next/image";
+
+export interface Pickup {
+  id: number;
+  user: {
+    id: string;
+    name: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    password: string | null;
+    roleId: number;
+  };
+  collectionPoint: {
+    id: number;
+    user: {
+      id: string;
+      name: string;
+      lastName: string;
+      email: string;
+      phoneNumber: string;
+      password: string | null;
+      roleId: number;
+    };
+    statusId: number | null;
+    agreementCode: string | null;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+  };
+  kilograms: number | null;
+  pickupDate: string | null;
+  commentary: string | null;
+  dateCreate: string | null;
+  pickupRequestStatus: {
+    id: number;
+    name: string;
+  } | null;
 }
 
-const events: IEvent[] = [
-    {
-        id: 1,
-        collectionPointName: "Point A",
-        dateTimeString: "2024-03-31 14:30:00", // Example datetime
-        weight: 12.5,
-    },
-    {
-        id: 2,
-        collectionPointName: "Point B",
-        dateTimeString: "2024-03-31 15:45:00", // Example datetime
-        weight: 8.2,
-    },
-    {
-        id: 3,
-        collectionPointName: "Point C",
-        dateTimeString: "2024-03-31 16:20:00", // Example datetime
-        weight: 10.0,
-    },
-    {
-        id: 4,
-        collectionPointName: "Point D",
-        dateTimeString: "2024-03-31 17:05:00", // Example datetime
-        weight: 15.7,
-    },
-    {
-        id: 5,
-        collectionPointName: "Point E",
-        dateTimeString: "2024-03-31 18:15:00", // Example datetime
-        weight: 9.8,
-    },
-    {
-        id: 6,
-        collectionPointName: "Point F",
-        dateTimeString: "2024-03-31 19:40:00", // Example datetime
-        weight: 11.2,
-    },
-    {
-        id: 7,
-        collectionPointName: "Point G",
-        dateTimeString: "2024-03-31 20:55:00", // Example datetime
-        weight: 13.4,
-    },
-    {
-        id: 8,
-        collectionPointName: "Point H",
-        dateTimeString: "2024-03-31 21:30:00", // Example datetime
-        weight: 7.5,
-    },
-    {
-        id: 9,
-        collectionPointName: "Point I",
-        dateTimeString: "2024-03-31 22:10:00", // Example datetime
-        weight: 14.0,
-    },
-    {
-        id: 10,
-        collectionPointName: "Point J",
-        dateTimeString: "2024-03-31 23:25:00", // Example datetime
-        weight: 10.5,
-    },
-    {
-        id:20,
-        collectionPointName: "Point Lean",
-        dateTimeString : "2024-02-20 12:25:00",
-        weight:10.5,
-    }
-];
+interface Collector {
+  id: string,
+  name: string,
+  last_name: string,
+  phone_number: string,
+  mail: string,
+  type: string
+}
 
-export default function Page(){
+export default function Page() {
+  const router = useRouter();
 
-    const [selectedDay, setSelectedDay] = useState(dayjs());
+  const [pickups, setPickups] = useState<Pickup[]>([]);
+  const [collectors, setCollectors] = useState<Collector[]>([]);
 
-    const filteredEvents = events.filter((event) => {
-        let day = dayjs(event.dateTimeString);
-        return (day.date() == selectedDay.date() && day.month() == selectedDay.month() && day.year() == selectedDay.year())
-    })
+  useEffect(() => {
+    const fetchPickups = async () => {
+      console.log("Fetching pickups...");
+      const data = await getPickups();
+      setPickups(data.data);
+    };
+    fetchPickups();
 
-    return(
-        <>
-        <TitleBar title={"Recolecciones"} />
-        <Calendar events={events} onDaySelected={setSelectedDay}></Calendar>
-        <DayEvents events={filteredEvents} day={selectedDay}></DayEvents>
-        </>
-    )
+    const fetchUsers = async () => {
+      console.log("Fetching collectors...");
+      const data = await getCollectors();
+      setCollectors(data);
+    };
+    fetchUsers();
+  }, []);
+
+  return (
+    <div>
+      <div className="shadow p-2">
+        <div className="w-[100%] p-6 bg-red flex flex-row justify-between">
+          <h1 className="text-[30px] font-bold">Listado de recolecciones</h1>
+        </div>
+        <ul className="flex flex-row justify-between">
+          <li className="w-[16.666666%] text-center">
+            <p className="text-[22px] font-bold">Fecha de creación</p>
+          </li>
+          <li className="w-[16.666666%] text-center">
+            <p className="text-[22px] font-bold">Punto de acopio</p>
+          </li>
+          <li className="w-[16.666666%] text-center">
+            <p className="text-[22px] font-bold">Recolector</p>
+          </li>
+          <li className="w-[16.666666%] text-center">
+            <p className="text-[22px] font-bold">Fecha de recolección</p>
+          </li>
+          <li className="w-[16.666666%] text-center">
+            <p className="text-[22px] font-bold">Estado</p>
+          </li>
+          <li className="w-[16.666666%] text-center">
+            <p className="text-[22px] font-bold">Notificar</p>
+          </li>
+        </ul>
+        {pickups.map((pickup) => (
+          <ul
+            key={pickup.id}
+            className="flex flex-row justify-between my-5 py-5 hover:bg-gray-100"
+          >
+            <li className="w-[16.666666%] text-center">
+              <p className="text-[15px]">{pickup.dateCreate == null ? "date" : pickup.dateCreate}</p>
+            </li>
+            <li className="w-[16.666666%] text-center">
+              <p className="text-[15px]">{pickup.collectionPoint.address}</p>
+            </li>
+            <li className="w-[16.666666%] text-center">
+              <select>
+                {collectors.map((collector) => (
+                  <option key={collector.id} value={collector.id} selected={pickup.user == null ? false : collector.id === pickup.user.id ? true : false}>
+                    {collector.name} {collector.last_name}
+                  </option>
+                ))}
+              </select>
+            </li>
+            <li className="w-[16.666666%] text-center">
+              <input type="datetime-local" value={pickup.pickupDate}/>
+            </li>
+            <li className="w-[16.666666%] text-center">
+              <p className="text-[15px]">{pickup.pickupRequestStatus == null ? "es null" : PICKUP_STATUS[pickup.pickupRequestStatus.id]}</p>
+            </li>
+            <li className="w-[16.666666%] text-center">
+              <button>Enviar</button>
+            </li>
+          </ul>
+        ))}
+      </div>
+    </div>
+  );
 }
