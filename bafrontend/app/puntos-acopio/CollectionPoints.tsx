@@ -21,13 +21,15 @@ export interface CollectionPointfilterParams {
   city: string
   address: string
   agreement: string
-  status: string;
+  status: string
+  userIdFile: boolean
+  placeImage: boolean
 }
 
 
 export default function CollectionPoints() {
 
-  const [collectionPointfilterParams, setCollectionFilterParams] = useState<CollectionPointfilterParams>({ name: "", country: "", state: "", city: "", address: "", agreement: "", status: "" });
+  const [collectionPointfilterParams, setCollectionFilterParams] = useState<CollectionPointfilterParams>({ name: "", country: "", state: "", city: "", address: "", agreement: "", status: "", userIdFile: false, placeImage: false });
   const [editMode, setEditMode] = useState(false)
   const { user } = useContext(UserContext);
   const router = useRouter();
