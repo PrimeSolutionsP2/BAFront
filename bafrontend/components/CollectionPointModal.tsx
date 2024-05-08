@@ -91,7 +91,7 @@ export default function CollectionPointModal({
     //Actualizar punto acopio desde back
 
     let updatedCollectionPoint = updateCollectionPoint(
-      ROLE_ID[user?.type],
+      user!.type,
       collectionPoint.id,
       newCollectionPoint
     );
@@ -127,11 +127,11 @@ export default function CollectionPointModal({
   //FILE HANDLING
 
   const handleFileChangeUserID = (event: any) => {
-    UploadIdFile(event.target.files[0], collectionPoint.id);
+    UploadIdFile(event.target.files[0], collectionPoint.id, user!.type);
   };
 
   const handleFileChangePlaceImage = (event: any) => {
-    UploadPlaceImage(event.target.files[0], collectionPoint.id);
+    UploadPlaceImage(event.target.files[0], collectionPoint.id, user!.type);
   };
 
   const downloadFile = (fileName: string, target: string = '_blank', features?: string) => [

@@ -67,7 +67,7 @@ export async function CreateCollectionPoint(
   return data;
 }
 export async function updateCollectionPoint(
-  userRole: number,
+  userRole: string,
   puntoAcopioId: number,
   puntoAcopio: PuntoAcopioReq
 ): Promise<GenericResponse> {
@@ -226,12 +226,13 @@ export async function getCollectionPointRequests(
 
 export async function UploadIdFile(
   file: File,
-  collectionPointId: number
+  collectionPointId: number,
+  role: string
 ): Promise<GenericResponse> {
   const formData = new FormData();
   formData.append("idFile", file);
   const res = await fetch(
-    COLLECTION_POINT_API + `collectionPoints/uploadIdFile/${collectionPointId}`,
+    COLLECTION_POINT_API + `collectionPoints/uploadIdFile/${collectionPointId}?role=${role}`,
     {
       method: "POST",
       body: formData,
@@ -243,12 +244,13 @@ export async function UploadIdFile(
 
 export async function UploadPlaceImage(
   file: File,
-  collectionPointId: number
+  collectionPointId: number,
+  role: string
 ): Promise<GenericResponse> {
   const formData = new FormData();
   formData.append("idFile", file);
   const res = await fetch(
-    COLLECTION_POINT_API + `collectionPoints/uploadPlaceImage/${collectionPointId}`,
+    COLLECTION_POINT_API + `collectionPoints/uploadPlaceImage/${collectionPointId}?role=${role}`,
     {
       method: "POST",
       body: formData,

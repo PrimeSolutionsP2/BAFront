@@ -16,7 +16,7 @@ interface UserContextType {
   
   export const UserProvider = ({children}: any) => {
       
-      const [user, setUser] = useState<UserData | null>({id: "0", name: "", mail: "", type: 0});
+      const [user, setUser] = useState<UserData | null>({id: "0", name: "", mail: "", type: ""});
   
       return (
           <UserContext.Provider value={{user, setUser}}>

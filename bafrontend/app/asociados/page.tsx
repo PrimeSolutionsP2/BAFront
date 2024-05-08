@@ -10,7 +10,7 @@ export interface UserData {
   id: string;
   name: string;
   mail: string;
-  type: number | string;
+  type: string;
 }
 
 export default function Page() {
