@@ -20,10 +20,8 @@ export interface User {
 
 export default async function addPickupRequest(payload:pickupRequestReq) {
     try {
-        const api_url = "http://localhost:8081/collections/";
 
-
-        const response = await fetch(api_url+"createRequestCollection", {
+        const response = await fetch(PICKUPS_API+"createRequestCollection", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
