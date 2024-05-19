@@ -20,7 +20,7 @@ export default function RootLayout(props: RootProps) {
 
           <UserProvider>
             <SideBar />
-            <div className="flex flex-col w-[100%]">
+            <div className=" flex flex-col w-[100%]">
               {props.children}
             </div>
           </UserProvider>

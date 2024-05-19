@@ -1,5 +1,6 @@
 import {
   FormEvent,
+  ReactElement,
   cloneElement,
   useContext,
   useEffect,
@@ -30,19 +31,18 @@ import puntosAcopioIcon from "public/icons/puntos-acopio-icon-b.svg";
 import Image from "next/image";
 import PuntosAcopio from "app/puntos-acopio/page";
 import { COLLECTION_POINT_API, ROLES, ROLE_ID } from "utils/constants";
+import { GetUsers, User } from "utils/login/user.service";
 
 export default function CollectionPointModal({
   isOpen,
   onClose,
   collectionPoint,
   editMode = false,
-  setEditMode,
-  setPuntosAcopio,
-  puntosAcopio,
   onEditMode,
   children,
   modalTitle,
-}) {
+}: { isOpen: boolean, onClose: any, collectionPoint: PuntoAcopio, editMode: boolean,
+ onEditMode:any,children: ReactElement | null, modalTitle:string}) {
   const focusInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -66,6 +66,20 @@ export default function CollectionPointModal({
     });
   }, [editMode]);
 
+  useEffect(()=> {
+    if(isOpen){
+    const fetchUser = async () =>{
+      console.log("cp",collectionPoint)
+      let user_cp : User =  await GetUsers(collectionPoint.userId)
+      console.log("user_cp",user_cp)
+      setUser(user_cp);
+
+    }
+
+    fetchUser();
+  }
+  },[isOpen])
+
   const [collectionPointForm, setCollectionPointForm] = useState({
     nombre: "",
     convenio: "",
@@ -76,6 +90,8 @@ export default function CollectionPointModal({
     userIdFile: false,
     placeImage: false,
   });
+
+  const [cpUser,setUser] = useState<User>({id:"",name:"",last_name:"",role:0,mail:"",phone_number:""});
 
   // Handle form submit
   const handleSubmit = (event) => {
@@ -135,11 +151,13 @@ export default function CollectionPointModal({
   };
 
   const downloadFile = (fileName: string, target: string = '_blank', features?: string) => [
-      window.open(COLLECTION_POINT_API + `collectionPoints/file/${fileName}`, target, features)
+    window.open(COLLECTION_POINT_API + `collectionPoints/file/${fileName}`, target, features)
   ]
 
+  console.log(collectionPoint)
+
   return (
-    <Modal hasCloseBtn={true} isOpen={isOpen} onClose={onClose}>
+    <Modal hasCloseBtn={false} isOpen={isOpen} onClose={onClose}>
       {collectionPoint && !editMode ? (
         <div className="">
           <div className="flex  border-2 border-black bg-[#FD595A]">
@@ -153,7 +171,7 @@ export default function CollectionPointModal({
 
           <div className="p-2">
             <p className="text-3xl">{collectionPoint.nombre}</p>
-            <p className="text-[#B6B6B6]">{"Nombre usuario punto acopio"}</p>
+            <p className="text-[#B6B6B6]">{cpUser.name + " " + cpUser.last_name}</p>
             <div className="flex gap-2">
               <div className="flex flex-row justify-start">
                 <p className="text-[#B6B6B6] text-xl">
@@ -174,13 +192,13 @@ export default function CollectionPointModal({
             <hr />
             <div className="flex flex-row gap-3 p-3">
               <Image src={mail} alt="mail"></Image>
-              <span>{"danielpalacios.diego@gmail.com"}</span>
+              <span>{cpUser.mail}</span>
             </div>
 
             <hr />
             <div className="flex flex-row gap-3 p-3">
               <Image src={phone} alt="mail"></Image>
-              <span>{"3217095829"}</span>
+              <span>{cpUser.phone_number}</span>
             </div>
             <hr />
             <div className="flex flex-row gap-3 p-3">
@@ -277,13 +295,13 @@ export default function CollectionPointModal({
             <hr />
             <div className="flex flex-row gap-3 p-3">
               <Image src={mail} alt="mail"></Image>
-              <span>{"danielpalacios.diego@gmail.com"}</span>
+              <span>{cpUser.mail}</span>
             </div>
 
             <hr />
             <div className="flex flex-row gap-3 p-3">
               <Image src={phone} alt="mail"></Image>
-              <span>{"3217095829"}</span>
+              <span>{cpUser.phone_number}</span>
             </div>
             <hr />
             <div className="flex flex-row gap-3 p-3">

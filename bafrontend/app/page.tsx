@@ -3,6 +3,7 @@
 import { UserContext } from "context/UserContext";
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { getPickups } from "utils/pickupRequest/pickupRequest.service";
 
 interface PageProps {
   searchParams: {
@@ -11,6 +12,7 @@ interface PageProps {
 }
 
 export default function Page(props: PageProps) {
+
 
   const router = useRouter();
   const {user} = useContext(UserContext);

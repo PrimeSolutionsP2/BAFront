@@ -11,8 +11,7 @@ import StateCard from "@/components/StateCard";
 import { chooseColor } from "utils/collectionPoint/utils";
 import { UserContext } from "context/UserContext";
 import { useRouter } from "next/navigation";
-import { UserData } from "app/asociados/page";
-
+import { User } from "utils/login/user.service";
 
 export interface CollectionPointfilterParams {
   name: string
@@ -63,9 +62,9 @@ export default function CollectionPoints() {
   const [changedCollectionPoint, setChangedCollectionPoint] = useState<boolean>(true);
     const fetchData = async () => {
 
-      if(user?.type == "ADMINISTRADOR"){
+      if(user.role = 1){
         setPuntosAcopio(await getCollectionPoints());
-      }else if(user?.type == "REPRESENTANTE"){
+      }else if(user.role == 3){
         setPuntosAcopio(await getCollectionPoints("search="+user.id));
 
       }
@@ -77,11 +76,11 @@ export default function CollectionPoints() {
   }, [])
 
 
-  if (user?.id == "0"){
+  if (user.id == "0"){
     router.push("/user/login")
   }
 
-  if(user?.type == "RECOLECTOR"){
+  if(user.role == 2){
     router.push("/")
   }
   
@@ -135,7 +134,7 @@ export default function CollectionPoints() {
                     
           }
           
-            {user?.type == "ADMINISTRADOR" && modalCollectionPoint ? modalCollectionPoint.estado == "ACTIVO" ?
+            {user.role == 1 && modalCollectionPoint ? modalCollectionPoint.estado == "ACTIVO" ?
 
               <button type="button"  onClick={()=> handleCollectionPointState(modalCollectionPoint,3)} className=" border-white font-bold  bg-[#F73636]  text-white  border-solid border-2 rounded-xl p-1"> Inhabilitar</button>
               :
@@ -152,7 +151,7 @@ export default function CollectionPoints() {
 }
 
 
-function ModalPickupForm({ collectionPointId }) {
+function ModalPickupForm({ collectionPointId } : {collectionPointId : number}) {
   const [showPickupRequest, setShowPickupRequest] = useState(false);
   function handlePickupRequestForm() {
     setShowPickupRequest(!showPickupRequest);

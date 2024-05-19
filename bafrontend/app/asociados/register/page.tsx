@@ -92,9 +92,9 @@ const handleLogin = async () => {
               ref={roleRef}
               className="border border-solid border-var-blue rounded-lg p-1"
             >
-              <option value={1}>{ROLES["Tipo1"]}</option>
-              <option value={2}>{ROLES["Tipo2"]}</option>
-              <option value={3}>{ROLES["Tipo3"]}</option>
+              <option value={1}>{ROLES[1]}</option>
+              <option value={2}>{ROLES[2]}</option>
+              <option value={3}>{ROLES[3]}</option>
             </select>
           </div>
           <button

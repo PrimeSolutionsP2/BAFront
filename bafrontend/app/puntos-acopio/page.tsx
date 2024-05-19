@@ -25,7 +25,7 @@ export default function PuntosAcopio() {
 
             </TitleBar>
 
-            <div className="p-5">
+            <div className="py-5">
                 <CollectionPoints></CollectionPoints>
             </div>
         </>

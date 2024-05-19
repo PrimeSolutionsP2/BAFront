@@ -1,23 +1,17 @@
 "use client"
 
-import { GetUsers } from "utils/login/user.service";
+import { GetUsers, User } from "utils/login/user.service";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import iconAddUser from "../../public/icons/icon _add user_.svg";
 import Image from "next/image";
-
-export interface UserData {
-  id: string;
-  name: string;
-  mail: string;
-  type: string;
-}
+import { ROLES } from "utils/constants";
 
 export default function Page() {
 
   const router = useRouter();
 
-  const [users, setUsers] = useState<UserData[]>([{id: "0", name: "unauthenticated", mail: "", type: 0}]);
+  const [users, setUsers] = useState<User[]>([{id: "0", name: "unauthenticated", mail: "", role: 0,last_name:"unauthenticated","phone_number":""}]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,7 +51,7 @@ export default function Page() {
               <p className="text-[15px]">{user.mail}</p>
             </li>
             <li className="w-[33.333333%] text-center">
-              <p className="text-[15px]">{user.type}</p>
+              <p className="text-[15px]">{ROLES[user.role]}</p>
             </li>
           </ul>
         ))}

@@ -26,7 +26,7 @@ import { ROLES } from "utils/constants";
 
 export default function SideBar() {
   const { user } = useContext(UserContext);
-  const userRole = user?.type !== null ? user?.type : "";
+  const userRole:number = user.role;
   console.log(user)
   const style = "px-10 py-4 flex flex-row gap-3 items-center cursor-pointer ";
   const pathName = usePathname();
@@ -45,7 +45,7 @@ export default function SideBar() {
                 </div>
                 <div>
                   <p className="text-[18px]">{user?.name}</p>
-                  <p className="text-[13px] text-[#A4A4A4]">{userRole}</p>
+                  <p className="text-[13px] text-[#A4A4A4]">{ROLES[userRole]}</p>
                 </div>
               </div>
             </li>
@@ -67,7 +67,7 @@ export default function SideBar() {
               />
               <Link href="/">Inicio</Link>
             </li>
-            {userRole === "ADMINISTRADOR" ? (
+            {userRole === 1 ? (
               <li
                 className={
                   style + (activeTab === "asociados" ? "text-var-red" : null)
@@ -84,7 +84,7 @@ export default function SideBar() {
             ) : (
               ""
             )}
-            {userRole === "ADMINISTRADOR" || userRole === "REPRESENTANTE" ? (
+            {userRole === 1 || userRole === 3 ? (
               <li
                 className={
                   style +
@@ -104,7 +104,7 @@ export default function SideBar() {
             ) : (
               ""
             )}
-            {userRole === "ADMINISTRADOR" ? (
+            {userRole === 1 ? (
               <li
                 className={
                   style + (activeTab === "metricas" ? "text-var-red" : null)
@@ -121,7 +121,7 @@ export default function SideBar() {
             ) : (
               ""
             )}
-            {userRole === "ADMINISTRADOR" ? (
+            {userRole === 1 ? (
               <li
                 className={
                   style + (activeTab === "solicitudes" ? "text-var-red" : null)
@@ -140,7 +140,7 @@ export default function SideBar() {
             ) : (
               ""
             )}
-            {userRole === "ADMINISTRADOR" || userRole === "RECOLECTOR" ? (
+            {userRole === 1|| userRole === 2 ? (
               <li
                 className={
                   style +

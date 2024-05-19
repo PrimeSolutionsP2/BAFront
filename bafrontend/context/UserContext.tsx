@@ -2,13 +2,13 @@ import { Dispatch, SetStateAction, createContext, useState } from "react";
 import { UserData } from "app/asociados/page";
 
 interface UserContextType {
-    user: UserData | null;
-    setUser: Dispatch<SetStateAction<UserData | null>>;
+    user: UserData ;
+    setUser: Dispatch<SetStateAction<UserData>>;
   }
   
   // Provide an initial value
   const initialContextValue: UserContextType = {
-    user: null,
+    user : {id:"",name:"",mail:"",role:0},
     setUser: () => {},
   };
   
@@ -16,7 +16,7 @@ interface UserContextType {
   
   export const UserProvider = ({children}: any) => {
       
-      const [user, setUser] = useState<UserData | null>({id: "0", name: "", mail: "", type: ""});
+      const [user, setUser] = useState<UserData>({id: "0", name: "", mail: "", role: 0});
   
       return (
           <UserContext.Provider value={{user, setUser}}>

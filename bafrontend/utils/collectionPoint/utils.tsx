@@ -11,3 +11,4 @@ export function chooseColor(estado: any): string {
         break;
     }
 }
+

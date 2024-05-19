@@ -31,9 +31,9 @@ export default function CollectionPoints() {
 
     const fetchData = async () => {
 
-        if(user?.type == "ADMINISTRADOR"){
+        if(user.role == 1){
           setPuntosAcopio(await getCollectionPointRequests());
-        }else if(user?.type == "REPRESENTANTE"){
+        }else if(user.role == 3){
           setPuntosAcopio(await getCollectionPointRequests("search="+user.id));
   
         }
@@ -49,7 +49,7 @@ export default function CollectionPoints() {
         router.push("/user/login")
       }
     
-      if(user?.type == "RECOLECTOR"){
+      if(user?.role == 2){
         router.push("/")
       }
 
@@ -71,7 +71,7 @@ export default function CollectionPoints() {
                     ))}
             </div>
             <CollectionPointModal modalTitle="Solicitud de punto de acopio pendiente" collectionPoint={modalCollectionPoint} isOpen={isCollectionModalOpen} onClose={handleCloseNewsletterModal}>
-                {user?.type == "ADMINISTRADOR" &&
+                {user?.role == 1 ?
                 <div className="flex justify-around">
                 
                     <button className=" border-white font-bold   bg-[#1C9D11]  text-white  border-solid border-2 rounded-xl px-10" onClick={() => {
@@ -98,7 +98,7 @@ export default function CollectionPoints() {
                     }className=" border-white font-bold  bg-[#FD595A]  text-white  border-solid border-2 rounded-xl px-10">
                         Rechazar
                     </button>
-                </div>}
+                </div> : ""}
 
             </CollectionPointModal>
         </>

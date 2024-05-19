@@ -16,7 +16,6 @@ export function PickupRequestForm({ collectionPointId , isOpen}) {
         event.preventDefault();
 
         const payload: pickupRequestReq = {
-            userId: user?.id,
             collectionPointId: collectionPointId,
             kilograms: 10,
             pickupDate: pickupRequestDate

@@ -2,11 +2,7 @@ export const USER_API = "http://localhost:5000/user/v1/";
 export const COLLECTION_POINT_API = "http://localhost:8080/api/v1/";
 export const PICKUPS_API = "http://localhost:8081/collections";
 
-export const ROLES = {
-    "Tipo1": "Administrador",
-    "Tipo2": "Recolector",
-    "Tipo3": "Representante"
-}
+export const ROLES = ["","ADMINISTRADOR","RECOLECTOR","REPRESENTANTE"]
 
 export const ROLE_ID = {
     "ADMINISTRADOR": 1,
@@ -14,8 +10,7 @@ export const ROLE_ID = {
     "REPRESENTANTE": 3,
 }
 
-export const PICKUP_STATUS = {
-    1: "PENDIENTE",
-    2: "AGENDADA",
-    3: "FINALIZADA"
-}
+export const PICKUP_STATUS = ["","PENDIENTE","COMPLETADA", "AGENDADA",]
+
+export const PICKUP_COLOR = ["gray","gray","green","blue"]
+

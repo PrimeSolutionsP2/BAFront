@@ -14,7 +14,7 @@ export default function CollectionPointCard({ collectionPoint, showStatus
 
       <p className="m-2">{collectionPoint.departamento + ", " + collectionPoint.pais}</p>
 
-      {showStatus ? <StateCard className="rounded-md text-center" color={chooseColor(collectionPoint.estado)} statusString={collectionPoint.estado} ></StateCard>
+      {showStatus ? <StateCard textClassName={"font-medium p-3"} className="rounded-md text-center" color={chooseColor(collectionPoint.estado)}  statusString={collectionPoint.estado} ></StateCard>
         : ""}
     </div>
   );
