@@ -66,7 +66,7 @@ export default function LineChart(props: BarChartProps) {
   },[])
   
   return (
-    <div style={{position: "relative", width: "90vw", height: "80vh"}}>
+    <div style={{position: "relative", width: "90%", height: "80vh"}}>
       <canvas ref={chartRef}></canvas>
     </div>
   );
