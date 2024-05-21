@@ -7,6 +7,7 @@ export interface BarChartProps {
   chartTitle: string
   labels: string[];
   values: number[];
+  activeMonth: string;
 }
 
 export default function BarChart(props: BarChartProps) {
@@ -63,7 +64,7 @@ export default function BarChart(props: BarChartProps) {
 
       chartRef.current.chart = newChart;
     }
-  },[])
+  },[props.activeMonth])
   
   return (
     <div style={{position: "relative", width: "90%", height: "80vh"}}>
