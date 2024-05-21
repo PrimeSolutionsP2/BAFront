@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "chart.js": "^4.4.2",
     "color": "^4.2.3",
     "dayjs": "^1.11.10",
     "next": "latest",
