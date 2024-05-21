@@ -77,7 +77,7 @@ export default function Page() {
           chartTitle="Toneladas por departamento"
           labels={COLOMBIA_DEPARTMENTS}
           values={tonsPerMonthDepartmen}
-          activeMonth={activeMonth}
+          activeMonth={""}
         />
         <h3>Meses</h3>
         <div className="w-[90%] rounded-l bg-slate-100 flex flex-row justify-between p-1">
