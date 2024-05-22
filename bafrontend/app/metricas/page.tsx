@@ -9,7 +9,9 @@ export default function Page() {
   const [activeDepartment, setActiveDepartment] = useState("ANT");
   const [tonsPerMonthDepartmentMonth, setTonsPerMonthDepartmentMonth] =
     useState("Enero");
-  const [tonsPerMonthDepartmen, setTonsPerMonthDepartment] = useState(Array.from({ length: 33 }, () => Math.floor(Math.random() * 100)));
+  const [tonsPerMonthDepartmen, setTonsPerMonthDepartment] = useState(
+    Array.from({ length: 33 }, () => Math.floor(Math.random() * 100))
+  );
 
   useEffect(() => {
     // Fetch data for tonsPerMonthDepartmentMonth
@@ -71,7 +73,6 @@ export default function Page() {
 
   return (
     <div className="overflow-auto max-h-screen">
-      <h2 className="text-var-red">Metricas</h2>
       <div className="flex flex-col gap-10 text-center items-center">
         <BarChart
           chartTitle="Toneladas por departamento"
@@ -112,6 +113,8 @@ export default function Page() {
           labels={Array.from({ length: 30 }, (_, i) => `${i + 1}`)}
           values={Array.from({ length: 30 }, () =>
             Math.floor(Math.random() * 100)
+          ).map((val, idx, arr) =>
+            arr.slice(0, idx + 1).reduce((a, b) => a + b, 0)
           )}
           activeMonth={activeMonth}
           activeDepartment={activeDepartment}
