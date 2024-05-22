@@ -1,4 +1,4 @@
-import { UserData } from "app/asociados/page";
+
 import { NextApiRequestCookies } from "next/dist/server/api-utils";
 import { COLLECTION_POINT_API } from "utils/constants";
 
@@ -45,14 +45,6 @@ interface GenericResponse {
   message: string;
 }
 
-export var userFilter = (user: UserData, puntoAcopio: PuntoAcopio) => {
-  if (user.role == 1) {
-    return true;
-  } else {
-    //TODO: DECENT USER AUTORIZATION SCHEME return puntoAcopio.userId == user?.id
-    return true;
-  }
-};
 
 export async function CreateCollectionPoint(
   request: CollectionPointCreateRequest

@@ -100,7 +100,7 @@ export default function PickupElement({ pickup: pickup, handleOpenNewsletterModa
             {actualPickup.pickupRequestStatus.id == 1 ?
               <button type="button" onClick={() => {
                 editPickupRequest(actualPickup,formCollectorId,formPickupDate); 
-                notifyPickupSchedule(actualPickup,actualPickup.collectionPoint)
+                notifyPickupSchedule(actualPickup,formCollectorId);
               }}className="font-bold  bg-[#E70C0C]  text-white  border-solid border-2 rounded-md shadow-2xl p-2 px-3">Agendar recolección y notificar</button>
               :
               editMode ?

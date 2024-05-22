@@ -4,7 +4,7 @@ import CollectionPointCard from "@/components/CollectionPointCard";
 import CollectionPointModal from "@/components/CollectionPointModal";
 import FilterBar from "@/components/FilterBar";
 import { useContext, useEffect, useState } from "react";
-import { PuntoAcopio, getCollectionPoints, updateCollectionPointStatus, userFilter } from "utils/collectionPoint/collectionPoint.service";
+import { PuntoAcopio, getCollectionPoints, updateCollectionPointStatus } from "utils/collectionPoint/collectionPoint.service";
 import PuntosAcopio from "./page";
 import { PickupRequestForm } from "@/components/pickupRequestForm";
 import StateCard from "@/components/StateCard";
@@ -62,7 +62,7 @@ export default function CollectionPoints() {
   const [changedCollectionPoint, setChangedCollectionPoint] = useState<boolean>(true);
     const fetchData = async () => {
 
-      if(user.role = 1){
+      if(user.role == 1){
         setPuntosAcopio(await getCollectionPoints());
       }else if(user.role == 3){
         setPuntosAcopio(await getCollectionPoints("search="+user.id));
@@ -142,8 +142,8 @@ export default function CollectionPoints() {
               :
               ""
             }
-
-          {modalCollectionPoint && <ModalPickupForm collectionPointId={modalCollectionPoint.id}></ModalPickupForm>}
+          
+          {modalCollectionPoint.estado == "ACTIVO" && <ModalPickupForm collectionPointId={modalCollectionPoint.id}></ModalPickupForm>}
         </div>
       </CollectionPointModal>
     </>

@@ -81,10 +81,15 @@ export async function CreateUser(credentials: CreateUserRequest): Promise<Create
 export async function GetUsers(userId=""): Promise<User[]| User> {
     const apiUrl = USER_API;
 
+    let urlString = "get/users"
+    if (userId != ""){
+        urlString = urlString + "/" + userId
+    }
+
     if (!apiUrl) {
         throw new Error('USER_API is not defined');
     }
-    const data = await fetch(apiUrl + `get/users/${userId}`,{
+    const data = await fetch(apiUrl + urlString,{
         method: "GET",
         headers: {
             "Content-Type": "application/json"
@@ -129,15 +134,16 @@ export async function notifyUser(userEmail:string,subject:string,body:string) {
     });
 
     const response = await data.json();
-    console.log(response)
+    console.log(userEmail,response)
     return response;
     
 }
 
 export async function notifyPickupSchedule(pickup:Pickup, userId:string){
-    
     const userResponse = await GetUsers(pickup.collectionPoint.userId);
     const user : User = userResponse;
+
+    const collector : User = await GetUsers(userId);
     console.log(user)
     const parsedDate = pickup.pickupDate.split("T");
 
@@ -150,8 +156,8 @@ export async function notifyPickupSchedule(pickup:Pickup, userId:string){
                 Correo electrónico: ${user.mail}
                 `;
 
-    notifyUser("danielpalacios.diego@gmail.com","Solicitud de recoleccion agendada",
+    notifyUser(collector.mail,"Solicitud de recoleccion agendada",
                 body)
     
-    console.log("Sent email",body,"to",pickup.user?.mail)
+    console.log("Sent email",body,"to",collector.mail)
 }

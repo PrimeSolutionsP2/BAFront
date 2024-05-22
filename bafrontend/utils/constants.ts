@@ -1,6 +1,6 @@
-export const USER_API = "http://localhost:8081/user/v1/";
+export const USER_API = "http://localhost:5000/user/v1/";
 export const COLLECTION_POINT_API = "http://localhost:8080/api/v1/";
-export const PICKUPS_API = "http://localhost:8082/collections";
+export const PICKUPS_API = "http://localhost:8081/collections";
 
 export const ROLES = ["","ADMINISTRADOR","RECOLECTOR","REPRESENTANTE"]
 

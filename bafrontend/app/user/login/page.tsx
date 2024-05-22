@@ -17,6 +17,7 @@ export default function Page() {
     const handleLogin = async () => {
         event?.preventDefault();
         const loggedInUser = await Login({mail: mailRef.current?.value, password: passwordRef.current?.value});
+        console.log(loggedInUser)
         setUser(loggedInUser);
         if(loggedInUser?.id !== 0) {
             router.push("/");
