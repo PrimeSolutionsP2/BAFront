@@ -12,23 +12,11 @@ import { chooseColor } from "utils/collectionPoint/utils";
 import { UserContext } from "context/UserContext";
 import { useRouter } from "next/navigation";
 import { User } from "utils/login/user.service";
-
-export interface CollectionPointfilterParams {
-  name: string
-  country: string
-  state: string
-  city: string
-  address: string
-  agreement: string
-  status: string
-  userIdFile: boolean
-  placeImage: boolean
-}
+import { CollectionPointfilterParams } from "utils/collectionPoint/collectionPoint.service";
 
 
-export default function CollectionPoints() {
+export default function CollectionPoints({collectionPointFilterParams} : {collectionPointFilterParams : CollectionPointfilterParams}) {
 
-  const [collectionPointfilterParams, setCollectionFilterParams] = useState<CollectionPointfilterParams>({ name: "", country: "", state: "", city: "", address: "", agreement: "", status: "", userIdFile: false, placeImage: false });
   const [editMode, setEditMode] = useState(false)
   const { user } = useContext(UserContext);
   const router = useRouter();
@@ -114,7 +102,7 @@ export default function CollectionPoints() {
 
         {puntosAcopio.
           filter((puntoAcopio: PuntoAcopio) => {
-            return puntoAcopio.nombre.toLowerCase().includes(collectionPointfilterParams.name.toLowerCase())
+            return puntoAcopio.nombre.toLowerCase().includes(collectionPointFilterParams.name.toLowerCase()) && (collectionPointFilterParams.status == "" || collectionPointFilterParams.status == puntoAcopio.estado)
           }).map((puntoAcopio) => (
             <button key={puntoAcopio.id} onClick={() => { handleOpenNewsletterModal(puntoAcopio) }} >
               <CollectionPointCard showStatus={true} key={puntoAcopio.id} collectionPoint={puntoAcopio}></CollectionPointCard>
@@ -122,7 +110,7 @@ export default function CollectionPoints() {
           ))}
       </div>
 
-        <CollectionPointModal modalTitle="Informacion punto de acopio"collectionPoint={modalCollectionPoint} isOpen={isCollectionModalOpen} onClose={handleCloseNewsletterModal} editMode={editMode} onEditMode={handleEditMode}>
+        <CollectionPointModal setEditMode={setEditMode} modalTitle="Informacion punto de acopio"collectionPoint={modalCollectionPoint} setCollectionPoint={setModalCollectionPoint} isOpen={isCollectionModalOpen} onClose={handleCloseNewsletterModal} editMode={editMode} onEditMode={handleEditMode}>
 
         <div className="flex flex-col">
           {editMode ?

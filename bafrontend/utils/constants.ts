@@ -10,6 +10,8 @@ export const ROLE_ID = {
     "REPRESENTANTE": 3,
 }
 
+export const COLLECTION_POINT_STATUS = ["","PENDIENTE","ACTIVO","INACTIVO"]
+
 export const PICKUP_STATUS = ["","PENDIENTE","COMPLETADA", "AGENDADA",]
 
 export const PICKUP_COLOR = ["gray","gray","green","blue"]

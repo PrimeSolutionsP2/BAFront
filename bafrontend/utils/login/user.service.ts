@@ -1,5 +1,5 @@
 import { USER_API } from "utils/constants";
-import { Pickup} from "utils/pickupRequest/pickupRequest.service";
+import { Pickup }  from "utils/pickupRequest/pickupRequest.service";
 
 interface LoginRequest {
     mail?: string;
@@ -102,18 +102,20 @@ export async function GetUsers(userId=""): Promise<User[]| User> {
     return response;
 }
 
-export async function DeleteUsers(id: number): Promise<ResponseStatus[]> {
+export async function DeleteUsers(id: string): Promise<ResponseStatus[]> {
+    console.log("id usuario",id)
     const apiUrl = USER_API;
     if (!apiUrl) {
         throw new Error('USER_API is not defined');
     }
-    const data = await fetch(apiUrl + "/delete/user/" + id,{
+    const data = await fetch(apiUrl + "delete/user/" + id,{
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
         }   
     });
     const response = await data.json();
+
     return response;
 }
 

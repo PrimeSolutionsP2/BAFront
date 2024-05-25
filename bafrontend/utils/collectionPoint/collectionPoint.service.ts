@@ -15,6 +15,8 @@ export interface CollectionPointCreateRequest {
   state: string;
   country: string;
   statusId: number;
+  placeImage : number,
+  userIdFile: number,
 }
 
 export interface PuntoAcopio {
@@ -28,6 +30,11 @@ export interface PuntoAcopio {
   pais: string;
   estado: string;
 }
+export interface CollectionPointfilterParams {
+  name: string
+  status: string
+}
+
 
 export interface PuntoAcopioReq {
   name?: string;
@@ -49,6 +56,7 @@ interface GenericResponse {
 export async function CreateCollectionPoint(
   request: CollectionPointCreateRequest
 ): Promise<GenericResponse> {
+  console.log(request)
   const res = await fetch(COLLECTION_POINT_API + "collectionPoints/request", {
     method: "POST",
     headers: {

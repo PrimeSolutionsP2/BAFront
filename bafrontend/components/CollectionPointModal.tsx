@@ -41,8 +41,10 @@ export default function CollectionPointModal({
   onEditMode,
   children,
   modalTitle,
+  setCollectionPoint,
+  setEditMode
 }: { isOpen: boolean, onClose: any, collectionPoint: PuntoAcopio, editMode: boolean,
- onEditMode:any,children: ReactElement | null, modalTitle:string}) {
+ onEditMode:any,children: ReactElement | null, modalTitle:string, setCollectionPoint:Function, setEditMode:Function}) {
   const focusInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
@@ -94,7 +96,7 @@ export default function CollectionPointModal({
   const [cpUser,setUser] = useState<User>({id:"",name:"",last_name:"",role:0,mail:"",phone_number:""});
 
   // Handle form submit
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     let newCollectionPoint: PuntoAcopioReq = {
       name: collectionPointForm.nombre,
@@ -106,13 +108,26 @@ export default function CollectionPointModal({
     };
     //Actualizar punto acopio desde back
 
-    let updatedCollectionPoint = updateCollectionPoint(
+    let updatedCollectionPoint = (await updateCollectionPoint(
       ROLES[user.role],
       collectionPoint.id,
       newCollectionPoint
-    );
-    console.log(updateCollectionPoint);
+    )).data;
+    console.log("update",updatedCollectionPoint);
 
+    
+    setCollectionPoint({    id: updatedCollectionPoint.id,
+      userId: updatedCollectionPoint.userId,
+      nombre: updatedCollectionPoint.name,
+      direccion: updatedCollectionPoint.address,
+      convenio: updatedCollectionPoint.agreement,
+      ciudad: updatedCollectionPoint.city,
+      departamento: updatedCollectionPoint.state,
+      pais: updatedCollectionPoint.country,
+      estado: updatedCollectionPoint.status.name,})
+      
+      setEditMode(false);
+      
     /*
     const newList = puntosAcopio.map((item : PuntoAcopio) => {
       if (item.id === collectionPoint.id) {

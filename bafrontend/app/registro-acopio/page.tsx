@@ -33,6 +33,8 @@ export default function Page() {
       state: stateRef.current?.value ?? "",
       country: countryRef.current?.value ?? "",
       statusId: 1,
+      placeImage : 0,
+      userIdFile: 0,
     });
     console.log(response);
   };

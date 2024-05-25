@@ -160,33 +160,6 @@ export default function SideBar() {
             ) : (
               ""
             )}
-            <li
-              className={
-                style + (activeTab === "perfil" ? "text-var-red" : null)
-              }
-            >
-              <Image
-                src={activeTab === "perfil" ? perfilIconRed : perfilIcon}
-                alt="perfil-icon"
-              />
-              <Link href="/perfil">Perfil</Link>
-            </li>
-            <li
-              className={
-                style +
-                (activeTab === "configuraciones" ? "text-var-red" : null)
-              }
-            >
-              <Image
-                src={
-                  activeTab === "configuraciones"
-                    ? configuracionesIconRed
-                    : configuracionesIcon
-                }
-                alt="configuraciones-icon"
-              />
-              <Link href="/configuraciones">Configuraciones</Link>
-            </li>
           </ul>
         </div>
       ) : null}
